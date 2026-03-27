@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>아파트 정보 테이블</title>
+    <style>
+      /* 기본 테이블 스타일링 */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      td {
+        vertical-align: middle;
+      }
+
+      /* 반응형 디자인 */
+      @media screen and (max-width: 600px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+
+        th {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+
+        tr {
+          margin-bottom: 1rem;
+        }
+
+        td {
+          border: none;
+          position: relative;
+          padding-left: 50%;
+        }
+
+        td::before {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap;
+          content: attr(data-label);
+          font-weight: bold;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>아파트 정보</h1>
+    <table id="aptTable">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>구</th>
+          <th>동</th>
+          <th>단지명</th>
+          <th>가구수</th>
+          <th>사용승인년도</th>
+          <th>주소</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 데이터가 여기에 삽입됩니다 -->
+      </tbody>
+    </table>
+
+    <script>
+      // API URL 설정 (JSON 형식 응답을 받기 위해 _type=json 추가)
+      const apiUrl =
+        "http://apis.data.go.kr/4050000/apt/getApt?serviceKey=vm4QGj2SMRb2EEVNzPgwq1lw3hNw%2FgOtBPi7XMHDoOPdLFNaVLmipvGQmwSZ49tQZequjU%2FTFDeDE0tIB%2B%2BJPg%3D%3D&pageNo=3&numOfRows=5&_type=json";
+
+      // 데이터 가져오기 (async/await 사용)
+      async function fetchData() {
+        try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) {
+            throw new Error(
+              "네트워크 응답이 올바르지 않습니다: " + response.statusText,
+            );
+          }
+          const data = await response.json(); // JSON으로 파싱
+          console.log("API 응답 데이터:", data); // 응답 데이터 구조 확인
+
+          const tableBody = document.querySelector("#aptTable tbody");
+
+          // JSON 응답 구조에 따라 데이터 접근
+          const items = data.items;
+
+          // 데이터가 있는지 확인
+          if (!items || items.length === 0) {
+            const noDataRow = document.createElement("tr");
+            const noDataCell = document.createElement("td");
+            noDataCell.colSpan = 7;
+            noDataCell.textContent = "데이터가 없습니다.";
+            noDataRow.appendChild(noDataCell);
+            tableBody.appendChild(noDataRow);
+          } else {
+            // forEach와 화살표 함수를 사용하여 각 아이템을 테이블에 추가
+            items.forEach((item) => {
+              const row = document.createElement("tr");
+
+              // 각 열에 대한 데이터 생성
+              const columns = [
+                { label: "번호", value: item.no || "N/A" },
+                { label: "구", value: item.gu || "N/A" },
+                { label: "동", value: item.dong || "N/A" },
+                { label: "단지명", value: item.cmplx_nm || "N/A" },
+                { label: "가구수", value: item.hh_cnt || "N/A" },
+                {
+                  label: "사용승인년도",
+                  value: item.use_insp_day
+                    ? item.use_insp_day.split("-")[0]
+                    : "N/A",
+                },
+                { label: "주소", value: item.addr || "N/A" },
+              ];
+
+              columns.forEach((col) => {
+                const cell = document.createElement("td");
+                cell.setAttribute("data-label", col.label);
+                cell.textContent = col.value;
+                row.appendChild(cell);
+              });
+
+              tableBody.appendChild(row);
+            });
+          }
+        } catch (error) {
+          console.error("데이터를 가져오는 중 오류가 발생했습니다:", error);
+          const tableBody = document.querySelector("#aptTable tbody");
+          const errorRow = document.createElement("tr");
+          const errorCell = document.createElement("td");
+          errorCell.colSpan = 7;
+          errorCell.textContent = "데이터를 불러오는 중 오류가 발생했습니다.";
+          errorRow.appendChild(errorCell);
+          tableBody.appendChild(errorRow);
+        }
+      }
+
+      // DOM이 모두 로드된 후 fetchData 함수 호출
+      document.addEventListener("DOMContentLoaded", fetchData);
+    </script>
+  </body>
+</html>

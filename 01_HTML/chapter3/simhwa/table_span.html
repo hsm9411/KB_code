@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <style>
+      table,
+      th,
+      td {
+        border: 1px solid black; /* Sets border width, style, and color */
+        border-collapse: collapse; /* Avoids double borders */
+      }
+      th,
+      td {
+        padding: 8px; /* Adds space between border and content (optional) */
+        text-align: left; /* Aligns text (optional) */
+      }
+    </style> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <table border="1">
+      <caption>
+        홍차
+      </caption>
+      <thead>
+        <tr>
+          <th colspan="2">지역별 홍차</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 중국 섹션: 3줄을 차지하므로 rowspan="3" -->
+        <tr>
+          <th rowspan="3">중국</th>
+          <td>정산소종</td>
+        </tr>
+        <tr>
+          <td>기문</td>
+        </tr>
+        <tr>
+          <td>운남</td>
+        </tr>
+
+        <!-- 인도 및 스리랑카 섹션: 4줄을 차지하므로 rowspan="4" -->
+        <tr>
+          <th rowspan="4">인도 및 스리랑카</th>
+          <td>아삼</td>
+        </tr>
+        <tr>
+          <td>실론</td>
+        </tr>
+        <tr>
+          <td>다질링</td>
+        </tr>
+        <tr>
+          <td>닐기리</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

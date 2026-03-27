@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <pre>
+<script>
+var student = {
+        이름: '홍길동',
+        국어: 92, 
+        수학: 98,
+        영어: 96, 
+        과학: 98
+};
+for(var key in student)
+	document.writeln(student[key]);		
+	
+var person = { };        
+person.이름 = '홍길동';
+person.취미 = '악기';
+person.특기 = '프로그래밍';
+person.장래희망 = '생명공학자';
+for(var key in person)
+	document.writeln(person[key]);
+document.writeln("================================")
+delete person.취미;
+for(var key in person)
+	document.writeln(person[key]);
+</script>
+</pre>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 반응형 웹을 위한 viewport 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응형 글자 크기</title>
+
+    <style>
+      /* 전체 페이지 기본 설정 */
+      body {
+        font-size: 16px; /* 기본 글자 크기 */
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 30px;
+        line-height: 1.6;
+      }
+
+      /* 제목 기본 스타일 */
+      h1 {
+        font-size: 3rem; /* 기본: 큰 화면 */
+        margin-bottom: 20px;
+        transition: font-size 0.3s ease;
+      }
+
+      /* 본문 문단 */
+      p {
+        font-size: 1rem;
+      }
+
+      /*
+      1000px 이하
+      큰 화면보다 약간 줄임
+    */
+      @media (max-width: 1000px) {
+        h1 {
+          font-size: 2.7rem;
+        }
+      }
+
+      /*
+      900px 이하
+    */
+      @media (max-width: 900px) {
+        h1 {
+          font-size: 2.4rem;
+        }
+      }
+
+      /*
+      800px 이하
+    */
+      @media (max-width: 800px) {
+        h1 {
+          font-size: 2.1rem;
+        }
+      }
+
+      /*
+      750px 이하
+    */
+      @media (max-width: 750px) {
+        h1 {
+          font-size: 1.9rem;
+        }
+      }
+
+      /*
+      700px 이하
+    */
+      @media (max-width: 700px) {
+        h1 {
+          font-size: 1.7rem;
+        }
+      }
+
+      /*
+      650px 이하
+    */
+      @media (max-width: 650px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+      }
+
+      /*
+      550px 이하
+      모바일에 가까운 구간
+    */
+      @media (max-width: 550px) {
+        h1 {
+          font-size: 1.3rem;
+        }
+      }
+
+      /*
+      480px 이하
+      작은 모바일 화면
+    */
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.1rem;
+        }
+      }
+
+      /* 화면 오른쪽 위 정보 표시 박스 */
+      #size-display {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.75);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-family: sans-serif;
+        font-size: 14px;
+        z-index: 9999;
+      }
+
+      /* 현재 적용 구간 표시 박스 */
+      #range-display {
+        margin-top: 30px;
+        padding: 15px;
+        background: #f1f2f6;
+        border-left: 6px solid #0984e3;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="mainTitle">반응형 글자 크기</h1>
+    <p>화면 크기에 따라 제목의 글자 크기가 단계적으로 조정됩니다.</p>
+
+    <!-- 현재 적용 중인 반응형 구간 표시 -->
+    <div id="range-display">
+      현재 구간: <span id="currentRange">확인 중...</span>
+    </div>
+
+    <!-- 오른쪽 위 고정 정보 박스 -->
+    <div id="size-display">
+      브라우저 Width: <span id="width">0</span>px | Height:
+      <span id="height">0</span>px
+      <br />
+      H1 Font Size: <span id="fontSize">0</span>
+    </div>
+
+    <script>
+      function updateSize() {
+        // 현재 브라우저 크기
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        document.getElementById("width").innerText = width;
+        document.getElementById("height").innerText = height;
+
+        // h1 실제 적용 글자 크기 가져오기
+        const title = document.getElementById("mainTitle");
+        const computedStyle = window.getComputedStyle(title);
+        const fontSize = computedStyle.fontSize;
+
+        document.getElementById("fontSize").innerText = fontSize;
+
+        // 현재 어떤 구간인지 표시
+        let rangeText = "";
+
+        if (width <= 480) {
+          rangeText = "480px 이하 → h1: 1.1rem";
+        } else if (width <= 550) {
+          rangeText = "481px ~ 550px → h1: 1.3rem";
+        } else if (width <= 650) {
+          rangeText = "551px ~ 650px → h1: 1.5rem";
+        } else if (width <= 700) {
+          rangeText = "651px ~ 700px → h1: 1.7rem";
+        } else if (width <= 750) {
+          rangeText = "701px ~ 750px → h1: 1.9rem";
+        } else if (width <= 800) {
+          rangeText = "751px ~ 800px → h1: 2.1rem";
+        } else if (width <= 900) {
+          rangeText = "801px ~ 900px → h1: 2.4rem";
+        } else if (width <= 1000) {
+          rangeText = "901px ~ 1000px → h1: 2.7rem";
+        } else {
+          rangeText = "1000px 초과 → h1: 3rem";
+        }
+
+        document.getElementById("currentRange").innerText = rangeText;
+      }
+
+      // 창 크기 변경 시 실행
+      window.addEventListener("resize", updateSize);
+
+      // 페이지 로드 완료 시 실행
+      window.addEventListener("load", updateSize);
+
+      // 최초 1회 실행
+      updateSize();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>버블링 예제</title>
+
+    <style>
+      /* 바깥 영역 */
+      #outer {
+        width: 300px;
+        height: 200px;
+        background-color: lightblue;
+        padding: 20px;
+      }
+
+      /* 안쪽 영역 */
+      #inner {
+        width: 120px;
+        height: 100px;
+        background-color: gold;
+        line-height: 100px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 바깥 영역 클릭 이벤트 -->
+      <!-- ⚠️ @click 앞에 반드시 공백 필요 -->
+      <div id="outer" @click="outerClick">
+        바깥 영역
+
+        <!-- 안쪽 영역 클릭 이벤트 -->
+        <div id="inner" @click="innerClick">안쪽 영역</div>
+      </div>
+
+      <!-- 클릭 로그 출력 -->
+      <p>{{ log }}</p>
+    </div>
+
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      Vue.createApp({
+        // 상태 데이터
+        data() {
+          return {
+            log: "", // 클릭 로그 문자열
+          };
+        },
+
+        methods: {
+          // 바깥 영역 클릭 시 실행
+          outerClick(e) {
+            this.log += "바깥 영역 클릭 / ";
+
+            // e.target : 실제 클릭된 요소
+            // e.currentTarget : 이벤트가 바인딩된 요소
+            // e.eventPhase : 이벤트 단계 (1=캡처, 2=타겟, 3=버블링)
+            console.log("OUTER", e.target, e.currentTarget, e.eventPhase);
+          },
+
+          // 안쪽 영역 클릭 시 실행
+          innerClick(e) {
+            this.log += "안쪽 영역 클릭 / ";
+
+            console.log("INNER", e.target, e.currentTarget, e.eventPhase);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

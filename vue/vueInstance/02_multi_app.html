@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>한 페이지에 독립된 앱 2개</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<h2>한 페이지에 Vue 앱 2개 (서로 독립)</h2>
+
+<!--
+  Vue 3에서는 createApp을 여러 번 호출해서
+  완전히 독립된 앱을 여러 개 만들 수 있다.
+  각 앱은 자기 data만 관리하고 서로 영향이 없다.
+-->
+
+<!-- 앱 1: 카운터 -->
+<div id="counter-app" style="border: 2px solid #42b883; padding: 16px; margin: 8px;">
+  <h3>앱 1: 카운터</h3>
+  <p>카운트: {{ count }}</p>
+  <button @click="count++">+1</button>
+  <button @click="count = 0">초기화</button>
+</div>
+
+<!-- 앱 2: 메모장 -->
+<div id="memo-app" style="border: 2px solid #e74c3c; padding: 16px; margin: 8px;">
+  <h3>앱 2: 메모장</h3>
+  <input v-model="text" placeholder="메모 입력">
+  <p>입력값: {{ text }}</p>
+  <p>글자 수: {{ text.length }}</p>
+</div>
+
+<p style="margin: 16px;">
+  ↑ 앱 1의 버튼을 눌러도 앱 2에 영향 없음. 완전히 독립.
+</p>
+
+<script>
+  const { createApp } = Vue
+
+  // 앱 1
+  const app1 = createApp({
+    data() {
+      return { count: 0 }
+    }
+  })
+  app1.mount('#counter-app')
+
+  // 앱 2 (app1과 완전히 독립)
+  const app2 = createApp({
+    data() {
+      return { text: '' }
+    }
+  })
+  app2.mount('#memo-app')
+
+  // app1에 등록한 컴포넌트는 app2에서 사용 불가
+  // 이것이 Vue 2와의 가장 큰 차이
+</script>
+
+</body>
+</html>

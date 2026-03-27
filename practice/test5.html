@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>단일 데이터 가져오기</title>
+  </head>
+  <body>
+    <h1>단일 JSON 데이터 가져오기</h1>
+    <button id="loadData">데이터 가져오기</button>
+    <div id="output"></div>
+
+    <script>
+      document
+        .getElementById("loadData")
+        .addEventListener("click", function () {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              const data = JSON.parse(xhr.responseText);
+              document.getElementById("output").innerHTML = `
+            <h2>${data.title}</h2>
+            <p>${data.body}</p>
+          `;
+            }
+          };
+
+          xhr.send();
+        });
+    </script>
+  </body>
+</html>

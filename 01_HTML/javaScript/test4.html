@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <h1>파라미터 타입 테스트</h1>
+    <hr />
+    <button onclick="testParaType(100)">숫자파라미터</button>
+    <button onclick="testParaType('test')">문자열파라미터</button>
+    <button onclick="testParaType({})">객체파라미터</button>
+    <button onclick="testParaType(function () {})">함수파라미터</button>
+    <button onclick="testParaType()">전달안함</button>
+    <script>
+      function testParaType(p) {
+        if (typeof p == "number") alert("숫자를 전달했네요");
+        else if (typeof p == "string") alert("문자열을 전달했네요");
+        else if (typeof p == "object") alert("객체를 전달했네요");
+        else if (typeof p == "function") alert("함수를 전달했네요");
+        else if (typeof p == "undefined") alert("전달된 파라미터가 없네요");
+        else alert("???");
+      }
+    </script>
+  </body>
+</html>

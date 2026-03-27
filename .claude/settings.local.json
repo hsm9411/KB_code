@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/node/vue -name dist -type d -not -path */node_modules/*)"
+    ]
+  }
+}

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive DOM Example</title>
+    <style>
+      /* General Styles */
+
+      /* body 스타일: 전체 페이지의 폰트, 마진, 패딩, 배경색 및 전환 효과 설정 */
+      body {
+        font-family:
+          "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* 폰트 설정 */
+        margin: 0; /* 기본 마진 제거 */
+        padding: 0; /* 기본 패딩 제거 */
+        background-color: #f4f4f9; /* 배경색 설정 */
+        color: #333; /* 글자색 설정 */
+        transition:
+          background-color 0.5s,
+          color 0.5s; /* 색상 전환 효과 */
+      }
+
+      /* h1 스타일: 제목의 가운데 정렬과 마진, 색상 설정 */
+      h1 {
+        text-align: center; /* 텍스트 가운데 정렬 */
+        margin: 20px 0; /* 상하 마진 설정 */
+        color: #444; /* 글자색 설정 */
+      }
+
+      /* 컨테이너 스타일: 페이지 중앙 정렬, 크기, 배경 및 그림자 설정 */
+      .container {
+        width: 90%; /* 너비를 90%로 설정 */
+        max-width: 800px; /* 최대 너비를 800px로 제한 */
+        margin: 20px auto; /* 상단 여백과 수평 중앙 정렬 */
+        padding: 20px; /* 내부 여백 설정 */
+        background: #fff; /* 배경색 설정 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+        border-radius: 10px; /* 모서리를 둥글게 설정 */
+        transition: box-shadow 0.3s; /* 그림자 변화에 대한 전환 효과 */
+      }
+
+      /* 컨테이너에 hover 효과: 그림자를 좀 더 강조 */
+      .container:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* hover 시 그림자 강조 */
+      }
+
+      /* 섹션 스타일: 하단 마진 추가 */
+      .section {
+        margin-bottom: 20px; /* 하단 여백 설정 */
+      }
+
+      /* h2 스타일: 섹션 제목의 하단 마진과 색상 설정 */
+      h2 {
+        margin-bottom: 10px; /* 하단 여백 설정 */
+        color: #555; /* 글자색 설정 */
+      }
+
+      /* input과 button 공통 스타일 */
+      input,
+      button {
+        padding: 10px 15px; /* 내부 여백 설정 */
+        margin: 5px 0; /* 상하 마진 설정 */
+        border: none; /* 테두리 제거 */
+        border-radius: 5px; /* 모서리를 둥글게 설정 */
+        font-size: 1em; /* 글꼴 크기 설정 */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+      }
+
+      /* input 스타일: 너비와 테두리 설정 */
+      input {
+        width: calc(100% - 30px); /* 전체 너비에서 패딩 고려 */
+        border: 1px solid #ddd; /* 테두리 색상 설정 */
+      }
+
+      /* button 스타일: 배경색, 글자색 및 커서 설정 */
+      button {
+        background-color: #007bff; /* 버튼 배경색 설정 */
+        color: white; /* 글자색 설정 */
+        cursor: pointer; /* 마우스 포인터 변경 */
+        transition: background-color 0.3s; /* 배경색 변화에 대한 전환 효과 */
+      }
+
+      /* 버튼 hover 효과: 배경색 변경 */
+      button:hover {
+        background-color: #0056b3; /* hover 시 배경색 변경 */
+      }
+
+      /* comment 스타일: 댓글 컨테이너의 배치와 스타일 설정 */
+      .comment {
+        display: flex; /* flexbox를 사용한 배치 */
+        justify-content: space-between; /* 좌우 공간 나누기 */
+        align-items: center; /* 수직 중앙 정렬 */
+        background-color: #f9f9f9; /* 배경색 설정 */
+        padding: 10px; /* 내부 여백 설정 */
+        margin: 5px 0; /* 상하 마진 설정 */
+        border-radius: 5px; /* 모서리를 둥글게 설정 */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+      }
+
+      /* 다크 테마 스타일: 전체 배경과 글자색 변경 */
+      .dark-theme {
+        background-color: #333; /* 배경색을 어둡게 설정 */
+        color: #f9f9f9; /* 글자색을 밝게 설정 */
+      }
+
+      /* 다크 테마에서의 컨테이너 스타일 */
+      .dark-theme .container {
+        background-color: #444; /* 배경색을 좀 더 어둡게 설정 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 그림자를 더 강조 */
+      }
+
+      /* 다크 테마에서 input과 button 스타일 */
+      .dark-theme input,
+      .dark-theme button {
+        background-color: #555; /* 배경색 설정 */
+        color: white; /* 글자색 설정 */
+      }
+
+      /* 다크 테마 버튼 hover 효과 */
+      .dark-theme button:hover {
+        background-color: #777; /* hover 시 배경색 설정 */
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Interactive DOM Manipulation Example</h1>
+
+    <div class="container">
+      <!-- Theme Toggle -->
+      <div class="section">
+        <h2>Theme Toggle</h2>
+        <button id="toggleThemeBtn">🌙 Switch to Dark Mode</button>
+      </div>
+
+      <!-- Comment System -->
+      <div class="section">
+        <h2>Comment System</h2>
+        <input type="text" id="commentInput" placeholder="Enter your comment" />
+        <button onclick="addComment()">Add Comment</button>
+        <div id="comments"></div>
+      </div>
+
+      <!-- Dynamic List -->
+      <div class="section">
+        <h2>Dynamic List</h2>
+        <button onclick="addListItem()">➕ Add Item</button>
+        <ul id="dynamicList"></ul>
+      </div>
+
+      <!-- Real-Time Input -->
+      <div class="section">
+        <h2>Real-Time Input Display</h2>
+        <input type="text" id="realTimeInput" placeholder="Type something..." />
+        <p>Your input: <strong id="displayInput"></strong></p>
+      </div>
+
+      <!-- Counter -->
+      <div class="section">
+        <h2>Counter</h2>
+        <p>Current Count: <strong id="counter">0</strong></p>
+        <button onclick="increment()">➕ Increase</button>
+        <button onclick="decrement()">➖ Decrease</button>
+      </div>
+    </div>
+
+    <script>
+      // Theme Toggle
+      const toggleThemeBtn = document.getElementById("toggleThemeBtn");
+      let isDarkMode = false;
+
+      toggleThemeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-theme");
+        isDarkMode = !isDarkMode;
+        toggleThemeBtn.textContent = isDarkMode
+          ? " Switch to Light Mode"
+          : "Switch to Dark Mode";
+      });
+
+      // Comment System
+      const commentsDiv = document.getElementById("comments");
+      function addComment() {
+        const commentInput = document.getElementById("commentInput");
+        const text = commentInput.value.trim();
+        if (text === "") {
+          alert("Please enter a comment!");
+          return;
+        }
+
+        const comment = document.createElement("div");
+        comment.className = "comment";
+        comment.innerHTML = `
+                <span>${text}</span>
+                <button onclick="this.parentElement.remove()"> Delete</button>
+            `;
+        commentsDiv.appendChild(comment);
+        commentInput.value = "";
+      }
+
+      // Dynamic List
+      const list = document.getElementById("dynamicList");
+      let itemCount = 1;
+      function addListItem() {
+        const listItem = document.createElement("li");
+        listItem.textContent = `Item ${itemCount++}`;
+        list.appendChild(listItem);
+      }
+
+      // Real-Time Input Display
+      const realTimeInput = document.getElementById("realTimeInput");
+      const displayInput = document.getElementById("displayInput");
+
+      realTimeInput.addEventListener("input", () => {
+        displayInput.textContent = realTimeInput.value;
+      });
+
+      // Counter System
+      const counterElement = document.getElementById("counter");
+      let count = 0;
+      function increment() {
+        counterElement.textContent = ++count;
+      }
+      function decrement() {
+        counterElement.textContent = --count;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var person = {
+        name: "이윤정",
+        eat: [true, undefined, 5 < 3, null],
+      };
+
+      console.log(person.name);
+      console.log(person["name"]);
+
+      for (let i of person.eat) {
+        console.log(i);
+      }
+    </script>
+  </body>
+</html>

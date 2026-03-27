@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>할 일 목록 (Todo)</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <style>
+    .done { text-decoration: line-through; color: #999; }
+  </style>
+</head>
+<body>
+
+<div id="app">
+
+  <h3>할 일 목록</h3>
+
+  <!-- 입력 -->
+  <form @submit.prevent="addTodo">
+    <input v-model="newTodo" placeholder="할 일 입력 후 Enter">
+    <button type="submit">추가</button>
+  </form>
+
+  <!-- 목록 -->
+  <ul>
+    <li v-for="todo in todos" :key="todo.id">
+      <label :class="{ done: todo.completed }">
+        <input type="checkbox" v-model="todo.completed">
+        {{ todo.text }}
+      </label>
+      <button @click="removeTodo(todo.id)">삭제</button>
+    </li>
+  </ul>
+
+  <!-- 빈 상태 -->
+  <p v-if="todos.length === 0">할 일이 없습니다.</p>
+
+  <!-- 통계 (computed) -->
+  <p v-else>
+    전체: {{ todos.length }} /
+    완료: {{ completedCount }} /
+    남은 할 일: {{ remainingCount }}
+  </p>
+
+  <!-- 일괄 동작 -->
+  <button @click="clearCompleted" v-show="completedCount > 0">
+    완료 항목 삭제
+  </button>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        newTodo: '',
+        nextId: 4,
+        todos: [
+          { id: 1, text: 'Vue 공부하기', completed: false },
+          { id: 2, text: 'HTML/CSS 복습', completed: true },
+          { id: 3, text: '프로젝트 시작', completed: false }
+        ]
+      }
+    },
+
+    computed: {
+      completedCount() {
+        return this.todos.filter(t => t.completed).length
+      },
+      remainingCount() {
+        return this.todos.filter(t => !t.completed).length
+      }
+    },
+
+    methods: {
+      addTodo() {
+        const text = this.newTodo.trim()
+        if (!text) return
+        this.todos.push({ id: this.nextId++, text, completed: false })
+        this.newTodo = ''
+      },
+      removeTodo(id) {
+        this.todos = this.todos.filter(t => t.id !== id)
+      },
+      clearCompleted() {
+        this.todos = this.todos.filter(t => !t.completed)
+      }
+    },
+
+    // watch로 로컬스토리지에 자동 저장
+    watch: {
+      todos: {
+        deep: true,  // 배열 내부 속성 변화도 감지
+        handler(newTodos) {
+          localStorage.setItem('todos', JSON.stringify(newTodos))
+          console.log('저장됨:', newTodos.length, '개')
+        }
+      }
+    },
+
+    // mounted에서 로컬스토리지 복원
+    mounted() {
+      const saved = localStorage.getItem('todos')
+      if (saved) {
+        this.todos = JSON.parse(saved)
+        this.nextId = Math.max(...this.todos.map(t => t.id), 0) + 1
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

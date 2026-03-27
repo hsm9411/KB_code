@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table tr td:first-child {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <form action="/submit_form" method="POST">
+        <fieldset style="width: 450px; border: 3px solid rgb(131, 131, 131)">
+          <legend>로그인</legend>
+
+          <table>
+            <tr>
+              <td>
+                <label for="id"><b>사용자 ID</b></label>
+              </td>
+              <td><input type="text" id="id" name="id" required /></td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="password"><b>비밀번호</b></label>
+              </td>
+              <td>
+                <input type="password" id="password" name="password" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="password_confirm"><b>비밀번호 확인</b></label>
+              </td>
+              <td>
+                <input
+                  type="password"
+                  id="password_confirm"
+                  name="password_confirm"
+                  required
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="name"><b>이름</b></label>
+              </td>
+              <td>
+                <input type="text" id="name" name="name" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="gender"><b>성별</b></label>
+              </td>
+              <td>
+                <input type="radio" id="male" name="gender" value="male" />
+                <label for="male">남</label>
+                <input type="radio" id="female" name="gender" value="female" />
+                <label for="female">여</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="hobby"><b>취미</b></label>
+              </td>
+              <td>
+                <label>
+                  <input type="checkbox" name="hobby" value="soccer" /> 축구
+                </label>
+                <label>
+                  <input type="checkbox" name="hobby" value="baseball" /> 야구
+                </label>
+                <label>
+                  <input type="checkbox" name="hobby" value="basketball" /> 배구
+                </label>
+                <label>
+                  <input type="checkbox" name="hobby" value="basketball" /> 농구
+                </label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="email"><b>이메일</b></label>
+              </td>
+              <td>
+                <input type="email" id="email" name="email" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="role"><b>역할</b></label>
+              </td>
+              <td>
+                <select id="role" name="role">
+                  <option value="user">ADMIN</option>
+                  <option value="admin">관리자</option>
+                  <option value="guest">일반회원</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="submit" value="확인" />
+                <input type="reset" value="다시쓰기" />
+              </td>
+              <td></td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>class / style 바인딩</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <style>
+    .active { background: #42b883; color: white; padding: 8px; }
+    .error { border: 2px solid red; }
+    .bold { font-weight: bold; }
+    .big { font-size: 24px; }
+    .box { display: inline-block; width: 100px; height: 100px; margin: 4px;
+           border: 1px solid #ccc; text-align: center; line-height: 100px; }
+  </style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- 1. class 객체 바인딩 -->
+  <h3>1. :class 객체 — 조건부 클래스</h3>
+  <button @click="isActive = !isActive">active 토글</button>
+  <button @click="hasError = !hasError">error 토글</button>
+  <div :class="{ active: isActive, error: hasError }">
+    active: {{ isActive }}, error: {{ hasError }}
+  </div>
+
+  <hr>
+
+  <!-- 2. class 배열 바인딩 -->
+  <h3>2. :class 배열</h3>
+  <label><input type="checkbox" v-model="useBold"> bold</label>
+  <label><input type="checkbox" v-model="useBig"> big</label>
+  <p :class="[useBold ? 'bold' : '', useBig ? 'big' : '']">
+    배열로 클래스 적용
+  </p>
+
+  <hr>
+
+  <!-- 3. style 바인딩 -->
+  <h3>3. :style 객체</h3>
+  <label>색상: <input v-model="textColor" type="color"></label>
+  <label>크기: <input v-model.number="fontSize" type="range" min="12" max="48"></label>
+  <p :style="{ color: textColor, fontSize: fontSize + 'px' }">
+    동적 스타일 ({{ fontSize }}px)
+  </p>
+
+  <hr>
+
+  <!-- 4. disabled 바인딩 -->
+  <h3>4. :disabled</h3>
+  <label><input type="checkbox" v-model="isLoading"> 로딩 중</label>
+  <button :disabled="isLoading">
+    {{ isLoading ? '로딩중...' : '제출' }}
+  </button>
+
+  <hr>
+
+  <!-- 5. 실전: 탭 메뉴 -->
+  <h3>5. 실전: 탭 메뉴</h3>
+  <button
+    v-for="tab in tabs"
+    :key="tab"
+    @click="currentTab = tab"
+    :class="{ active: currentTab === tab }"
+    style="margin-right: 4px; cursor: pointer;"
+  >
+    {{ tab }}
+  </button>
+  <p style="margin-top: 8px;">선택된 탭: {{ currentTab }}</p>
+
+  <hr>
+
+  <!-- 6. 실전: 색상 선택기 -->
+  <h3>6. 실전: 색상 선택기</h3>
+  <div
+    v-for="color in colors"
+    :key="color"
+    class="box"
+    :style="{ backgroundColor: color }"
+    :class="{ error: selectedColor === color }"
+    @click="selectedColor = color"
+    style="cursor: pointer;"
+  >
+    {{ color }}
+  </div>
+  <p>선택: {{ selectedColor }}</p>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        isActive: false,
+        hasError: false,
+        useBold: false,
+        useBig: false,
+        textColor: '#000000',
+        fontSize: 16,
+        isLoading: false,
+        tabs: ['홈', '게시판', '설정'],
+        currentTab: '홈',
+        colors: ['tomato', 'orange', 'gold', 'skyblue', '#42b883'],
+        selectedColor: ''
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>단방향 / 양방향 바인딩</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>단방향 바인딩 (data → 화면)</h3>
+      <p>{{ message }}</p>
+      <input :value="message" placeholder="여기 입력해도 data 안 바뀜" />
+      <button @click="message = '변경됨'">data 직접 변경</button>
+
+      <hr />
+
+      <h3>양방향 바인딩 (data ↔ 화면)</h3>
+      <input v-model="name" placeholder="입력하면 아래 실시간 반영" />
+      <p>입력값: {{ name }}</p>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            message: "안녕하세요",
+            name: "",
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- 문자 인코딩을 UTF-8로 설정 -->
+    <meta charset="UTF-8" />
+    <!-- 반응형 웹을 위해 뷰포트 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 문서 제목 설정 -->
+    <title>CSS Display 응용 예제</title>
+    <!-- 스타일 정의 -->
+    <style>
+      /* 전체 페이지 기본 스타일 */
+      body {
+        font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+        margin: 0; /* 페이지 여백 제거 */
+        padding: 0; /* 페이지 내부 여백 제거 */
+      }
+
+      /* 공통 컨테이너 스타일 */
+      .container {
+        padding: 20px; /* 내부 여백 설정 */
+        margin: 20px; /* 외부 여백 설정 */
+        background-color: #f7f7f7; /* 배경색 설정 */
+        border: 1px solid #ddd; /* 회색 테두리 */
+      }
+
+      /* Inline 요소 스타일 */
+      .inline-example span {
+        display: inline; /* 인라인 디스플레이 */
+        background-color: #ffd1dc; /* 배경색 설정 */
+        padding: 5px 10px; /* 내부 여백 설정 */
+        margin: 2px; /* 요소 간 간격 */
+        border-radius: 5px; /* 모서리를 둥글게 */
+      }
+
+      /* Block 요소 스타일 */
+      .block-example div {
+        display: block; /* 블록 디스플레이 */
+        background-color: #87ceeb; /* 배경색 설정 */
+        margin-bottom: 10px; /* 요소 간 하단 여백 */
+        padding: 15px; /* 내부 여백 설정 */
+        color: #fff; /* 텍스트 색상 */
+        font-weight: bold; /* 텍스트 굵게 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+      }
+
+      /* Inline-Block 요소 스타일 */
+      .inline-block-example div {
+        display: inline-block; /* 인라인 블록 디스플레이 */
+        width: 150px; /* 너비 설정 */
+        height: 100px; /* 높이 설정 */
+        margin: 10px; /* 요소 간 여백 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+        line-height: 100px; /* 수직 중앙 정렬 */
+        background-color: #ffb6c1; /* 배경색 설정 */
+        color: #fff; /* 텍스트 색상 */
+        font-weight: bold; /* 텍스트 굵게 */
+        border-radius: 8px; /* 모서리를 둥글게 */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+      }
+
+      /* 카드 레이아웃 스타일 */
+      .card-layout {
+        display: flex; /* 플렉스 디스플레이 */
+        flex-wrap: wrap; /* 줄 바꿈 허용 */
+        gap: 20px; /* 요소 간 간격 */
+        justify-content: space-between; /* 요소를 양쪽에 균등 배치 */
+      }
+
+      .card-layout h2 {
+        width: 100%; /* 너비를 100%로 주어 혼자 한 줄을 다 차지하게 만듦 */
+        margin-bottom: 20px; /* 카드들과의 간격을 위해 여백 추가 */
+      }
+
+      /* 개별 카드 스타일 */
+      .card {
+        display: inline-block; /* 인라인 블록 디스플레이 */
+        width: 200px; /* 카드 너비 설정 */
+        height: 250px; /* 카드 높이 설정 */
+        background-color: #fff; /* 카드 배경색 */
+        border: 1px solid #ddd; /* 카드 테두리 */
+        border-radius: 8px; /* 모서리를 둥글게 */
+        overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 박스 그림자 */
+      }
+
+      /* 카드 이미지 스타일 */
+      .card img {
+        width: 100%; /* 이미지 너비를 카드 너비에 맞춤 */
+        height: 150px; /* 이미지 고정 높이 */
+        object-fit: cover; /* 이미지 비율 유지 */
+      }
+
+      /* 카드 콘텐츠 스타일 */
+      .card-content {
+        padding: 10px; /* 내부 여백 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+      }
+
+      /* 카드 제목 스타일 */
+      .card-content h3 {
+        margin: 0; /* 상하 여백 제거 */
+        font-size: 16px; /* 텍스트 크기 설정 */
+        color: #333; /* 텍스트 색상 설정 */
+      }
+
+      /* 카드 설명 스타일 */
+      .card-content p {
+        margin: 5px 0; /* 상하 여백 설정 */
+        color: #777; /* 텍스트 색상 */
+        font-size: 14px; /* 텍스트 크기 설정 */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 페이지 제목 -->
+
+    <!-- Inline Example -->
+    <section class="container inline-example">
+      <h2>Inline Example</h2>
+      <!-- 인라인 요소들 -->
+      <span>Tag 1</span>
+      <span>Tag 2</span>
+      <span>Tag 3</span>
+    </section>
+
+    <!-- Block Example -->
+    <section class="container block-example">
+      <h2>Block Example</h2>
+      <!-- 블록 요소들 -->
+      <div>Block Element 1</div>
+      <div>Block Element 2</div>
+    </section>
+
+    <!-- Inline-Block Example -->
+    <section class="container inline-block-example">
+      <h2>Inline-Block Example</h2>
+      <!-- 인라인 블록 요소들 -->
+      <div>Box 1</div>
+      <div>Box 2</div>
+      <div>Box 3</div>
+    </section>
+
+    <!-- Card Layout -->
+    <section class="container card-layout">
+      <h2>Card Layout</h2>
+      <!-- 개별 카드 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150" alt="Card Image" />
+        <div class="card-content">
+          <h3>Card Title 1</h3>
+          <p>Description for card 1</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150" alt="Card Image" />
+        <div class="card-content">
+          <h3>Card Title 2</h3>
+          <p>Description for card 2</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/200x150" alt="Card Image" />
+        <div class="card-content">
+          <h3>Card Title 3</h3>
+          <p>Description for card 3</p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>반응형 시스템 확인</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h3>반응형 확인</h3>
+
+  <!-- data가 바뀌면 여기가 자동으로 바뀐다 -->
+  <p>이름: {{ name }}</p>
+  <p>나이: {{ age }}</p>
+  <p>목록: {{ items }}</p>
+
+  <button @click="name = '김영희'">이름 변경</button>
+  <button @click="age++">나이 +1</button>
+  <button @click="items.push('새 항목')">항목 추가</button>
+  <button @click="reset">초기화</button>
+
+  <hr>
+  <h3>비반응형 비교</h3>
+  <p>외부변수: {{ outside }}</p>
+  <button @click="outside = '변경시도'">외부변수 변경 시도</button>
+  <small>← 이건 data에 선언되어 있으므로 반응형으로 동작함</small>
+</div>
+
+<script>
+  const { createApp } = Vue
+
+  // 이건 Vue 바깥의 일반 변수 (반응형 아님)
+  let normalVar = '일반변수'
+
+  const vm = createApp({
+    data() {
+      return {
+        name: '홍길동',
+        age: 25,
+        items: ['사과', '바나나'],
+        outside: normalVar   // 초기값만 복사됨, 연결 아님
+      }
+    },
+    methods: {
+      reset() {
+        this.name = '홍길동'
+        this.age = 25
+        this.items = ['사과', '바나나']
+      }
+    }
+  }).mount('#app')
+
+  // 콘솔에서 확인해보기:
+  // vm.name = '테스트'  → 화면 바뀜 (반응형)
+  // normalVar = '변경'  → 화면 안 바뀜 (비반응형)
+  console.log('콘솔에서 vm.name = "테스트" 입력해보세요')
+</script>
+
+</body>
+</html>

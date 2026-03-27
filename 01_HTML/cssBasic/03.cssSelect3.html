@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div,
+      p {
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid red;
+      }
+      /*title이라는 속성이 있는 모든 노드*/
+      [title] {
+        background: red;
+        color: white;
+        font-weight: bold;
+      }
+      /*title속성값이 two인 모든 노드 */
+      [title="two"] {
+        border: 5px solid green;
+      }
+      /* title속성값이 two인 p 노드*/
+      p[title="two"] {
+        border: 10px solid blue;
+        color: pink;
+      }
+      /* 속성값과 띄어쓰기로 구분된 속성값의 일치 여부 확인 */
+      p[title~="second"] {
+        background: #fc6aad; /* title 속성에 "second" 단어가 포함된 <p> 요소의 배경색 설정 */
+      }
+      /* class 속성이 "second"로 시작하는 <p> 요소의 배경색 설정 */
+      p[class^="second"] {
+        background: #25d32c;
+      }
+
+      /* class 속성이 "wrap"으로 끝나는 <p> 요소의 글자색 설정 */
+      p[class$="wrap"] {
+        color: red;
+        font-weight: bold;
+      }
+      /* class 속성에 "two" 문자열이 포함된 요소의 배경색 설정 */
+      [class*="two"] {
+        background: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div title="one">selector[attribute name]</div>
+    <div title="two">selector[attribute name=value]</div>
+    <p title="two">selector[attribute name=value]</p>
+    <p title="first second third">selector[attribute name~=value]</p>
+    <p class="second-container">selector[attribute name^=value]</p>
+    <p class="second-wrap">selector[attribute name$=value]</p>
+    <div class="onetwothree">dfdf</div>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue Directive 실습 - v-text / v-html</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 30px; }
+    .box { border: 1px solid #ccc; padding: 16px; margin: 12px 0; border-radius: 6px; }
+    h2 { color: #42b883; }
+    label { font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>Vue Directive 실습 - v-text / v-html</h2>
+
+  <div id="app">
+
+    <!-- v-text: 텍스트 그대로 출력 (HTML 태그를 문자열로 표시) -->
+    <div class="box">
+      <label>v-text</label>
+      <p v-text="plainText"></p>
+      <p v-text="htmlText"></p>
+      <small>* HTML 태그가 문자열로 출력됨 (이스케이프 처리)</small>
+    </div>
+
+    <!-- v-html: HTML 태그를 실제로 렌더링 -->
+    <div class="box">
+      <label>v-html</label>
+      <p v-html="plainText"></p>
+      <p v-html="htmlText"></p>
+      <small>* HTML 태그가 실제로 적용되어 렌더링됨</small>
+    </div>
+
+    <!-- 비교: 이중 중괄호 {{ }} -->
+    <div class="box">
+      <label>{{ }} 머스태시 문법 (참고)</label>
+      <p>{{ plainText }}</p>
+      <p>{{ htmlText }}</p>
+      <small>* v-text와 동일하게 HTML을 문자열로 표시</small>
+    </div>
+
+  </div>
+
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+      data() {
+        return {
+          plainText: '안녕하세요, Vue!',
+          htmlText: '<strong style="color: tomato;">굵은 빨간 텍스트</strong>'
+        }
+      }
+    }).mount('#app')
+  </script>
+
+</body>
+</html>

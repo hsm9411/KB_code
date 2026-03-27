@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>click 이벤트</title>
+  </head>
+  <body>
+    <div id="app">
+      <a href="https://naver.com" @click="checkMove">네이버로이동</a>
+
+      <p>{{message}}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: "",
+          };
+        },
+        methods: {
+          checkMove(e) {
+            const result = confirm("정말로 이동?");
+            if (!result) {
+              e.preventDefault();
+              this.message = "이동을 취소합니다";
+            } else {
+              this.message = "페이지이동";
+            }
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

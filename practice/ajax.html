@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON 배열 데이터 가져와 출력</title>
+  </head>
+  <body>
+    <h1>JSON 배열 데이터 가져오기</h1>
+    <button id="loadPosts">게시물 가져오기</button>
+    <ul id="postList"></ul>
+
+    <script>
+      document
+        .getElementById("loadPosts")
+        .addEventListener("click", (event) => {
+          const xhr = new XMLHttpRequest(); //ajax
+          // console.log(xhr);
+          xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+          xhr.onreadystatechange = () => {
+            //콜백함수 지정하는 부분
+            //console.log(JSON.parse(xhr.responseText));
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+              const postList = document.getElementById("postList");
+              postList.innerHTML = "";
+              //console.log(response);//[]
+              [...response].forEach((element) => {
+                console.log(element["title"]);
+                const li = document.createElement("li");
+                li.innerText = `${element["title"]}`;
+                postList.appendChild(li);
+              });
+            }
+          };
+          xhr.send();
+        });
+    </script>
+  </body>
+</html>

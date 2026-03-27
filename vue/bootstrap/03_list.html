@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Bootstrap - 목록 관리</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+
+  <!-- 기본 List Group -->
+  <h2>1. 기본 List Group</h2>
+  <ul class="list-group mb-4">
+    <li class="list-group-item">항목 1</li>
+    <li class="list-group-item">항목 2</li>
+    <li class="list-group-item">항목 3</li>
+  </ul>
+
+  <!-- Active / Disabled -->
+  <h2>2. Active / Disabled</h2>
+  <ul class="list-group mb-4">
+    <li class="list-group-item active">선택됨 (active)</li>
+    <li class="list-group-item">일반 항목</li>
+    <li class="list-group-item disabled">비활성 (disabled)</li>
+  </ul>
+
+  <!-- 색상 -->
+  <h2>3. 색상 적용</h2>
+  <ul class="list-group mb-4">
+    <li class="list-group-item list-group-item-primary">Primary</li>
+    <li class="list-group-item list-group-item-success">Success</li>
+    <li class="list-group-item list-group-item-danger">Danger</li>
+    <li class="list-group-item list-group-item-warning">Warning</li>
+    <li class="list-group-item list-group-item-info">Info</li>
+  </ul>
+
+  <!-- 링크/버튼으로 사용 -->
+  <h2>4. 클릭 가능한 목록 (action)</h2>
+  <div class="list-group mb-4">
+    <a href="#" class="list-group-item list-group-item-action active">선택된 링크</a>
+    <a href="#" class="list-group-item list-group-item-action">링크 항목</a>
+    <a href="#" class="list-group-item list-group-item-action">링크 항목</a>
+    <a href="#" class="list-group-item list-group-item-action disabled">비활성 링크</a>
+  </div>
+
+  <!-- 뱃지 포함 -->
+  <h2>5. 뱃지 포함 목록</h2>
+  <ul class="list-group mb-4">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      받은메일
+      <span class="badge bg-primary rounded-pill">14</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      보낸메일
+      <span class="badge bg-primary rounded-pill">2</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      스팸
+      <span class="badge bg-danger rounded-pill">99+</span>
+    </li>
+  </ul>
+
+  <!-- 커스텀 내용 -->
+  <h2>6. 커스텀 내용 목록</h2>
+  <div class="list-group mb-4">
+    <a href="#" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">게시글 제목</h5>
+        <small>3일 전</small>
+      </div>
+      <p class="mb-1">게시글 내용 미리보기가 여기에 표시됩니다.</p>
+      <small>작성자: 홍길동</small>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">두 번째 게시글</h5>
+        <small>5일 전</small>
+      </div>
+      <p class="mb-1">두 번째 게시글의 내용 미리보기입니다.</p>
+      <small>작성자: 김영희</small>
+    </a>
+  </div>
+
+  <!-- 수평 목록 -->
+  <h2>7. 수평 목록</h2>
+  <ul class="list-group list-group-horizontal">
+    <li class="list-group-item">항목 1</li>
+    <li class="list-group-item">항목 2</li>
+    <li class="list-group-item">항목 3</li>
+  </ul>
+
+</div>
+
+</body>
+</html>

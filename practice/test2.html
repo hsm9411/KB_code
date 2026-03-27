@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판 글쓰기</title>
+    <style>
+      /* 공통 스타일 */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+      }
+
+      header,
+      footer {
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      nav ul li {
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        width: 80%;
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .form-group textarea {
+        height: 150px;
+        resize: none;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 5px;
+      }
+
+      .success-message {
+        color: green;
+        text-align: center;
+        font-size: 1.1em;
+        margin-top: 20px;
+      }
+
+      footer p {
+        margin: 5px 0;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 헤더 영역 -->
+    <header>
+      <h1>My Company</h1>
+      <nav>
+        <ul>
+          <li><a href="#">홈</a></li>
+          <li><a href="#">게시판</a></li>
+          <li><a href="#">회사소개</a></li>
+          <li><a href="#">문의하기</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="container">
+      <!-- <h1>게시판 글쓰기</h1> -->
+      <form id="postForm">
+        <!-- 제목 -->
+        <div class="form-group">
+          <label for="title">제목</label>
+          <input type="text" id="title" placeholder="제목을 입력하세요" />
+          <div class="error" id="titleError"></div>
+        </div>
+
+        <!-- 작성자 -->
+        <div class="form-group">
+          <label for="author">작성자</label>
+          <input
+            type="text"
+            id="author"
+            placeholder="작성자 이름을 입력하세요"
+          />
+          <div class="error" id="authorError"></div>
+        </div>
+
+        <!-- 이메일 -->
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input type="email" id="email" placeholder="이메일을 입력하세요" />
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <!-- 비밀번호 -->
+        <div class="form-group">
+          <label for="password">비밀번호</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="6자 이상 입력하세요"
+          />
+          <div class="error" id="passwordError"></div>
+        </div>
+
+        <!-- 내용 -->
+        <div class="form-group">
+          <label for="content">내용</label>
+          <textarea id="content" placeholder="내용을 입력하세요"></textarea>
+          <div class="error" id="contentError"></div>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <button type="button" onclick="validateForm()">글쓰기</button>
+        <div class="success-message" id="successMessage"></div>
+      </form>
+    </main>
+
+    <!-- 풋터 영역 -->
+    <footer>
+      <p>© 2024 My Company. All Rights Reserved.</p>
+      <p>
+        주소: 서울특별시 어딘가 123-45 | 전화: 02-1234-5678 | 이메일:
+        info@mycompany.com
+      </p>
+    </footer>
+
+    <script>
+      function validateForm() {
+        // 요소 가져오기
+        const title = document.getElementById("title");
+        const author = document.getElementById("author");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const content = document.getElementById("content");
+
+        const titleError = document.getElementById("titleError");
+        const authorError = document.getElementById("authorError");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+        const contentError = document.getElementById("contentError");
+        const successMessage = document.getElementById("successMessage");
+
+        // 에러 메시지 초기화
+        titleError.textContent = "";
+        authorError.textContent = "";
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        contentError.textContent = "";
+        successMessage.textContent = "";
+
+        let isValid = true;
+
+        // 제목 검사
+        if (title.value.trim() === "") {
+          titleError.textContent = "제목은 필수 입력 항목입니다.";
+          isValid = false;
+        }
+
+        // 작성자 검사
+        if (author.value.trim() === "") {
+          authorError.textContent = "작성자는 필수 입력 항목입니다.";
+          isValid = false;
+        }
+
+        // 이메일 검사
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email.value.trim())) {
+          emailError.textContent = "유효한 이메일을 입력하세요.";
+          isValid = false;
+        }
+
+        // 비밀번호 검사
+        if (password.value.trim().length < 6) {
+          passwordError.textContent = "비밀번호는 6자 이상 입력하세요.";
+          isValid = false;
+        }
+
+        // 내용 검사
+        if (content.value.trim() === "") {
+          contentError.textContent = "내용은 필수 입력 항목입니다.";
+          isValid = false;
+        }
+
+        // 성공 메시지 표시
+        if (isValid) {
+          successMessage.textContent = "글이 성공적으로 작성되었습니다!";
+          document.getElementById("postForm").reset();
+        }
+      }
+    </script>
+  </body>
+</html>

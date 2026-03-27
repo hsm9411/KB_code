@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let nf = function (callback, n) {
+      for (let i = 0; i < n; i++) {
+        callback();
+      }
+    };
+
+    let f = function () {
+      alert("함수 호출");
+    };
+
+    nf(f, 5);
+  </script>
+</html>

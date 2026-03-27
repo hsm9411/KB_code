@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>this 확인</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h3>this로 모든 곳에 접근</h3>
+
+  <p>count (data): {{ count }}</p>
+  <p>doubled (computed): {{ doubled }}</p>
+  <p>마지막 동작: {{ lastAction }}</p>
+
+  <button @click="increase">+1 (methods)</button>
+  <button @click="decrease">-1 (methods)</button>
+  <button @click="reset">초기화</button>
+
+  <hr>
+
+  <h3>this.$el (DOM 접근)</h3>
+  <button @click="showEl">$el 확인 (콘솔)</button>
+
+  <h3>this.$refs (특정 DOM 접근)</h3>
+  <input ref="nameInput" placeholder="이 input에 포커스">
+  <button @click="focusInput">input에 포커스</button>
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        count: 0,
+        lastAction: ''
+      }
+    },
+
+    computed: {
+      doubled() {
+        return this.count * 2     // this → data 접근
+      }
+    },
+
+    methods: {
+      increase() {
+        this.count++              // this → data 접근
+        this.lastAction = 'increase 호출'  // this → data 접근
+      },
+      decrease() {
+        this.count--
+        this.lastAction = 'decrease 호출'
+      },
+      reset() {
+        this.count = 0
+        this.lastAction = 'reset 호출'
+      },
+      showEl() {
+        console.log('this.$el:', this.$el)   // this → $el (마운트된 DOM)
+      },
+      focusInput() {
+        this.$refs.nameInput.focus()          // this → $refs (특정 DOM)
+        this.lastAction = 'input에 포커스'
+      }
+    },
+
+    watch: {
+      count(newVal) {
+        // watch 안에서도 this 사용 가능
+        console.log(`count 변경: ${newVal}, doubled: ${this.doubled}`)
+      }
+    },
+
+    mounted() {
+      // 라이프사이클 훅에서도 this 사용 가능
+      console.log('mounted에서 this.count:', this.count)
+      console.log('mounted에서 this.$el:', this.$el)
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

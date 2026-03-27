@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>v-if vs v-show</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <h3>v-if (DOM 자체를 제거/생성)</h3>
+  <button @click="showA = !showA">토글</button>
+  <p v-if="showA">v-if로 보임 (개발자도구에서 DOM 확인해보세요)</p>
+  <p v-else>v-else: showA가 false일 때</p>
+
+  <hr>
+
+  <h3>v-show (display:none만 토글)</h3>
+  <button @click="showB = !showB">토글</button>
+  <p v-show="showB">v-show로 보임 (DOM은 항상 존재, display만 바뀜)</p>
+
+  <hr>
+
+  <h3>v-if / v-else-if / v-else</h3>
+  <button @click="score += 10">점수 +10 (현재: {{ score }})</button>
+  <button @click="score = 0">초기화</button>
+  <p v-if="score >= 90">A 등급</p>
+  <p v-else-if="score >= 80">B 등급</p>
+  <p v-else-if="score >= 70">C 등급</p>
+  <p v-else>F 등급</p>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        showA: true,
+        showB: true,
+        score: 0
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

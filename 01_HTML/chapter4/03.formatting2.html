@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML 텍스트 포맷팅 및 스타일링</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+      }
+      .highlight {
+        background-color: yellow;
+        padding: 2px;
+      }
+      .center {
+        text-align: center;
+      }
+      .important {
+        font-weight: bold;
+        color: red;
+      }
+      .note {
+        font-style: italic;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="center">HTML 텍스트 포맷팅 및 스타일링</h1>
+
+    <!-- 1. 기본 텍스트 포맷팅 태그 -->
+    <h2>1. 기본 텍스트 포맷팅 태그</h2>
+    <p><b>굵게</b> 표시된 텍스트입니다. (태그: <b>&lt;b&gt;</b>)</p>
+    <p>
+      <strong>중요</strong>한 내용을 강조합니다. (태그:
+      <strong>&lt;strong&gt;</strong>)
+    </p>
+    <p><i>기울임</i> 표시된 텍스트입니다. (태그: <i>&lt;i&gt;</i>)</p>
+    <p>
+      <em>강조된</em> 내용을 기울임으로 표시합니다. (태그: <em>&lt;em&gt;</em>)
+    </p>
+    <p><u>밑줄</u> 표시된 텍스트입니다. (태그: <u>&lt;u&gt;</u>)</p>
+    <p><s>취소선</s>이 그어진 텍스트입니다. (태그: <s>&lt;s&gt;</s>)</p>
+
+    <!-- 1.5 위 첨자 및 아래 첨자 -->
+    <p>아인슈타인의 방정식: E = mc<sup>2</sup></p>
+    <p>물의 화학식: H<sub>2</sub>O</p>
+
+    <!-- 2. 문단과 구역을 나누는 태그 -->
+    <h2>2. 문단과 구역을 나누는 태그</h2>
+    <p>단락은 <b>&lt;p&gt;</b> 태그로 정의됩니다.</p>
+    <p>예시로 첫 번째 단락입니다.</p>
+    <p>예시로 두 번째 단락입니다.</p>
+
+    <!-- 줄바꿈 -->
+    <p>줄바꿈은 <b>&lt;br&gt;</b> 태그로 표현합니다.</p>
+    <p>첫 번째 줄<br />두 번째 줄</p>
+
+    <!-- 수평선 -->
+    <p>수평선은 <b>&lt;hr&gt;</b> 태그로 표현합니다.</p>
+    <hr />
+
+    <!-- 3. 텍스트 강조와 스타일링 -->
+    <h2>3. 텍스트 강조와 스타일링</h2>
+    <p>
+      <mark>이 텍스트는 강조</mark>되어 있습니다. (태그: <b>&lt;mark&gt;</b>)
+    </p>
+    <blockquote>
+      이 내용은 긴 인용문입니다. (태그: <b>&lt;blockquote&gt;</b>)
+    </blockquote>
+    <p><q>이 내용은 짧은 인용문</q>입니다. (태그: <b>&lt;q&gt;</b>)</p>
+
+    <!-- 코드 블록 -->
+    <p>코드 블록은 <b>&lt;code&gt;</b> 태그를 사용합니다.</p>
+    <p><code>console.log('Hello World');</code></p>
+
+    <!-- 사전 정의된 텍스트 -->
+    <p>사전 정의된 텍스트는 <b>&lt;pre&gt;</b> 태그로 표현합니다.</p>
+    <pre>
+      이것은  
+      사전 정의된
+      텍스트입니다.
+    </pre>
+
+    <!-- 4. HTML과 인라인 스타일링 -->
+    <h2>4. HTML과 인라인 스타일링</h2>
+    <p style="color: red; font-size: 20px">
+      이 텍스트는 빨간색이고 크기가 20px입니다.
+    </p>
+    <p style="color: blue">이 텍스트는 파란색입니다.</p>
+    <p style="font-size: 18px">이 텍스트는 크기가 18px입니다.</p>
+    <p style="text-align: center">이 텍스트는 중앙에 정렬되었습니다.</p>
+  </body>
+</html>

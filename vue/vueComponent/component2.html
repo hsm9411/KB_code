@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>component</title>
+  </head>
+  <body>
+    <div id="app">
+      <child-component v-bind:propsdata="message"></child-component>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      var app = Vue.createApp({
+        name: "App",
+        data() {
+          return {
+            message: "소리없는 아우성",
+          };
+        },
+      });
+
+      app.component("child-component", {
+        name: "child-component",
+        data() {
+          return {};
+        },
+        props: {
+          propsdata: String,
+        },
+        template: `<p>Root 로부터 전달된 aaaa {{propsdata}} aaaa 데이터</p>
+        <p>다른 연습 태그</p>
+        `,
+      });
+
+      var vm = app.mount("#app");
+    </script>
+  </body>
+</html>

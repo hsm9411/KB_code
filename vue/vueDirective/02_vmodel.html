@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>v-model 다양한 input</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- 1. 텍스트 -->
+  <h3>1. text</h3>
+  <input v-model="text" placeholder="입력">
+  <p>값: {{ text }}</p>
+
+  <!-- 2. textarea -->
+  <h3>2. textarea</h3>
+  <textarea v-model="memo" rows="3" placeholder="메모"></textarea>
+  <p>값: {{ memo }}</p>
+
+  <!-- 3. 체크박스 (단일 - boolean) -->
+  <h3>3. 체크박스 (단일)</h3>
+  <label>
+    <input type="checkbox" v-model="agree"> 동의합니다
+  </label>
+  <p>값: {{ agree }}</p>
+
+  <!-- 4. 체크박스 (다중 - 배열) -->
+  <h3>4. 체크박스 (다중)</h3>
+  <label><input type="checkbox" v-model="langs" value="Java"> Java</label>
+  <label><input type="checkbox" v-model="langs" value="Python"> Python</label>
+  <label><input type="checkbox" v-model="langs" value="JS"> JS</label>
+  <p>값: {{ langs }}</p>
+
+  <!-- 5. 라디오 -->
+  <h3>5. 라디오</h3>
+  <label><input type="radio" v-model="gender" value="남"> 남</label>
+  <label><input type="radio" v-model="gender" value="여"> 여</label>
+  <p>값: {{ gender }}</p>
+
+  <!-- 6. select -->
+  <h3>6. select</h3>
+  <select v-model="city">
+    <option disabled value="">선택</option>
+    <option>서울</option>
+    <option>부산</option>
+    <option>대전</option>
+  </select>
+  <p>값: {{ city }}</p>
+
+  <!-- 7. select 다중 -->
+  <h3>7. select (다중 - ctrl+클릭)</h3>
+  <select v-model="colors" multiple style="height: 80px;">
+    <option>빨강</option>
+    <option>파랑</option>
+    <option>초록</option>
+  </select>
+  <p>값: {{ colors }}</p>
+
+  <!-- 8. 수식어 -->
+  <h3>8. 수식어 (modifier)</h3>
+  <p>.lazy — 입력 완료(포커스 아웃) 시 반영</p>
+  <input v-model.lazy="lazyText" placeholder="포커스 빼면 반영">
+  <p>값: {{ lazyText }}</p>
+
+  <p>.number — 숫자로 변환</p>
+  <input v-model.number="num" type="number" placeholder="숫자">
+  <p>값: {{ num }} (타입: {{ typeof num }})</p>
+
+  <p>.trim — 앞뒤 공백 제거</p>
+  <input v-model.trim="trimmed" placeholder="공백 포함 입력">
+  <p>값: [{{ trimmed }}]</p>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        text: '',
+        memo: '',
+        agree: false,
+        langs: [],
+        gender: '',
+        city: '',
+        colors: [],
+        lazyText: '',
+        num: 0,
+        trimmed: ''
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

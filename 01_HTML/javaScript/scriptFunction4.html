@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 오버로드금지
+        // function test(){
+        //     alert('test()');
+        // }
+        // function test(i) {
+        //         alert('test('+i+')');
+        // }
+        // function test(i,k) {
+        //         alert('test(' + i + ')'+k);
+        // }
+        // test();
+        function test(x,y,z,k,i) {//arguments는 가변인자 
+               if(arguments.length!=test.length){
+                throw new Error('인수가 다르다'+arguments.length);
+                return false;
+               }
+                for(let i in  arguments){
+                    console.log(arguments[i]);
+                }
+            }
+       test(1,2,3,4,5);   
+      test(10,20,30,40,50,60);   
+        </script>
+      
+
+
+    </script>
+</body>
+</html>

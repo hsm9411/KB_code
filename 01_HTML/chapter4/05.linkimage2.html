@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML 링크와 이미지 예시</title>
+  </head>
+  <body>
+    <h1>HTML 링크와 이미지</h1>
+
+    <!-- 기본 링크 -->
+    <p><a href="https://www.google.com">Google로 이동</a></p>
+
+    <!-- 새 탭에서 링크 열기 -->
+    <p>
+      <a
+        href="https://www.google.com"
+        target="_blank"
+        title="Google 페이지 열기"
+      >
+        새 창에서 Google 열기</a
+      >
+    </p>
+
+    <!-- 내부 링크 -->
+    <a href="#section1">섹션 1로 이동</a>
+
+    <br />
+
+    <!-- 이미지 삽입 -->
+    <img src="../images/apple2.jpg" alt="apple" width="600" height="400" />
+    <br />
+
+    <!-- 이미지를 클릭하면 링크로 이동 -->
+    <a href="https://www.google.com">
+      <img src="../images/apple.jpg" alt="google 로고" width="200" />
+    </a>
+
+    <br />
+
+    <!-- 내부 섹션 -->
+    <h2 id="section1">섹션 1</h2>
+    <p>이곳은 섹션 1의 내용입니다.</p>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment System</title>
+    <style>
+      /* body 스타일: 페이지 전체의 폰트, 마진, 배경색 설정 */
+      body {
+        font-family:
+          Arial, sans-serif; /* 폰트 설정: Arial, 대체 폰트로 sans-serif */
+        margin: 20px; /* 바깥쪽 여백 설정 */
+        background-color: #f9f9f9; /* 배경색을 연한 회색으로 설정 */
+      }
+
+      /* h1 스타일: 제목의 가운데 정렬과 색상 설정 */
+      h1 {
+        text-align: center; /* 텍스트 가운데 정렬 */
+        color: #333; /* 글자색을 어두운 회색으로 설정 */
+      }
+
+      /* 댓글 컨테이너 스타일: 중앙 정렬과 최대 너비 설정 */
+      .comment-container {
+        margin: 20px auto; /* 상단/하단 마진과 수평 중앙 정렬 */
+        width: 80%; /* 전체 너비의 80% 설정 */
+        max-width: 600px; /* 최대 너비를 600px로 제한 */
+      }
+
+      /* 입력 필드 스타일: 너비, 여백, 패딩 및 테두리 설정 */
+      #commentInput {
+        width: 100%; /* 전체 너비 사용 */
+        padding: 10px; /* 내부 여백 설정 */
+        margin-bottom: 10px; /* 하단 마진 설정 */
+        border: 1px solid #ccc; /* 테두리를 연한 회색으로 설정 */
+        border-radius: 5px; /* 모서리를 둥글게 설정 */
+        box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+      }
+
+      /* 버튼 스타일: 패딩, 배경색, 글자색, 커서 및 테두리 설정 */
+      button {
+        display: block; /* 블록 요소로 설정 */
+        padding: 10px; /* 내부 여백 설정 */
+        border: none; /* 테두리 제거 */
+        background-color: #007bff; /* 배경색을 파란색으로 설정 */
+        color: white; /* 글자색을 흰색으로 설정 */
+        font-weight: bold; /* 글자 굵기 설정 */
+        border-radius: 5px; /* 모서리를 둥글게 설정 */
+        cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+        margin-bottom: 20px; /* 하단 여백 설정 */
+      }
+
+      /* 버튼 hover 효과: 배경색 변경 */
+      button:hover {
+        background-color: #0056b3; /* hover 시 배경색을 진한 파란색으로 변경 */
+      }
+
+      /* 댓글 목록 스타일: 기본 리스트 스타일 제거 */
+      .comment-list {
+        list-style: none; /* 리스트 마커 제거 */
+        padding: 0; /* 내부 여백 제거 */
+      }
+
+      /* 각 댓글 항목 스타일: 배치, 여백, 테두리 및 배경색 설정 */
+      .comment-item {
+        display: flex; /* Flexbox를 사용하여 요소 정렬 */
+        justify-content: space-between; /* 양쪽 정렬 (내용과 버튼) */
+        align-items: center; /* 수직 중앙 정렬 */
+        background-color: white; /* 배경색을 흰색으로 설정 */
+        padding: 10px; /* 내부 여백 설정 */
+        margin-bottom: 5px; /* 하단 마진 설정 */
+        border: 1px solid #ddd; /* 테두리를 연한 회색으로 설정 */
+        border-radius: 5px; /* 모서리를 둥글게 설정 */
+      }
+
+      /* 댓글 항목 내 버튼 스타일: 배경색, 패딩 및 모서리 설정 */
+      .comment-item button {
+        background-color: red; /* 배경색을 빨간색으로 설정 */
+        padding: 5px 10px; /* 내부 여백 설정 */
+        border-radius: 3px; /* 모서리를 둥글게 설정 */
+        font-size: 0.9em; /* 글자 크기 설정 */
+      }
+
+      /* 댓글 항목 버튼 hover 효과: 배경색 변경 */
+      .comment-item button:hover {
+        background-color: darkred; /* hover 시 배경색을 어두운 빨간색으로 변경 */
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Comment System</h1>
+    <div class="comment-container">
+      <!-- 댓글 입력 영역 -->
+      <input
+        type="text"
+        id="commentInput"
+        placeholder="Enter your comment here"
+      />
+      <button onclick="addComment()">Add Comment</button>
+
+      <!-- 댓글 목록 영역 -->
+      <ul class="comment-list" id="commentList"></ul>
+    </div>
+
+    <script>
+      const commentInput = document.getElementById("commentInput"); // 입력 필드
+      const commentList = document.getElementById("commentList"); // 댓글 리스트 컨테이너
+
+      // 댓글 추가 함수
+      function addComment() {
+        const commentText = commentInput.value.trim(); // 입력값 읽기 및 공백 제거
+
+        if (commentText === "") {
+          alert("Please enter a comment!");
+          return;
+        }
+
+        // 댓글 항목 생성
+        const listItem = document.createElement("li");
+        listItem.className = "comment-item";
+
+        // 댓글 내용
+        const commentContent = document.createElement("span");
+        commentContent.textContent = commentText;
+
+        // 삭제 버튼
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.onclick = function () {
+          commentList.removeChild(listItem); // 댓글 삭제
+        };
+
+        // 항목에 추가
+        listItem.appendChild(commentContent);
+        listItem.appendChild(deleteButton);
+
+        // 댓글 목록에 추가
+        commentList.appendChild(listItem);
+
+        // 입력 필드 초기화
+        commentInput.value = "";
+      }
+    </script>
+  </body>
+</html>

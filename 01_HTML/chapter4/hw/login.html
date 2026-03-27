@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <form action="/submit_form" method="POST">
+        <fieldset style="width: 450px; border: 3px solid rgb(131, 131, 131)">
+          <legend>로그인</legend>
+
+          <table>
+            <tr>
+              <td>
+                <label for="id"><b>사용자 ID</b></label>
+              </td>
+              <td><input type="text" id="id" name="id" required /></td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="password"><b>비밀번호</b></label>
+              </td>
+              <td>
+                <input type="password" id="password" name="password" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2">
+                <input type="submit" value="확인" />
+                <input type="reset" value="다시쓰기" />
+              </td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

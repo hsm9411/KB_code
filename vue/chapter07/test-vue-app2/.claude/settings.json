@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Program Files/**)",
+      "Bash(cmd.exe /c \"node --version && where node\")",
+      "Bash(cmd.exe /c \"node --version\")",
+      "Bash(cmd.exe /c \"where node\")",
+      "Bash(/c/Users/hasun/AppData/Roaming/nvm/nvm.exe list:*)",
+      "Read(//c/Users/hasun/AppData/Roaming/nvm//**)",
+      "Read(//c/nvm4w/nodejs//**)",
+      "Bash(export PATH=\"/c/nvm4w/nodejs:$PATH\")",
+      "Read(//c/nvm4w/nodejs/**)",
+      "Bash(cmd.exe /c \"echo %NVM_SYMLINK% && echo %NVM_HOME%\")",
+      "Bash(cmd.exe /c \"set NVM\")",
+      "Bash(cmd.exe /c \"set\")"
+    ]
+  }
+}

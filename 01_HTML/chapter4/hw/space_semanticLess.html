@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- header 대신 순수 div -->
+    <div>
+      <h1>HTML5 기본</h1>
+    </div>
+
+    <!-- main 대신 순수 div -->
+    <div>
+      <!-- 첫 번째 article (메뉴 부분) 대신 순수 div -->
+      <div>
+        <ul>
+          <li><a href="#menu1">메뉴 1</a></li>
+          <li><a href="#menu2">메뉴 2</a></li>
+          <li><a href="#menu3">메뉴 3</a></li>
+        </ul>
+      </div>
+
+      <!-- 두 번째 article 대신 순수 div -->
+      <div>
+        <!-- 💡 이 id="menu1"은 링크 이동을 위해 반드시 남겨둬야 합니다! -->
+        <h2 id="menu1">Lorem ipsum dolor sit amet</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+
+      <div>
+        <!-- 💡 이 id="menu2"도 링크 이동의 '목적지' 역할을 합니다. -->
+        <h2 id="menu2">Lorem ipsum dolor sit amet</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+
+      <div>
+        <!-- 💡 여기도 마찬가지로 목적지 id="menu3" -->
+        <h2 id="menu3">Lorem ipsum dolor sit amet</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+    </div>
+
+    <!-- footer 대신 순수 div -->
+    <div>
+      <p>서울특별시 강서구 내발산동</p>
+    </div>
+  </body>
+</html>

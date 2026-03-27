@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // const [x, y, z] = [10, 20, 30];
+      // console.log(x, y, z);
+
+      // const person = {
+      //   name: "Apple",
+      //   data: function () {
+      //     alert("test");
+      //   },
+      //   age: 25,
+      // };
+
+      // console.log(person.name);
+      // person.data();
+      // console.log(person["age"]);
+
+      // const { name, data, age } = person;
+
+      // console.log(name);
+      // console.log(data());
+      // console.log(age);
+
+      // rest 연산자
+
+      const sumAll = (...numbers) => numbers.reduce((a, b) => a + b, 0);
+      console.log(sumAll(1, 2, 3, 4)); // 10
+    </script>
+  </body>
+</html>

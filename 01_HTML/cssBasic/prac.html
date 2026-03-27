@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CSS Selector : Adjacent sibling Selector(인접선택자)</title>
+    <style>
+      div,
+      p {
+        padding: 10px;
+        margin: 10px;
+        font-weight: bold;
+      }
+
+      div {
+        background: #0076ff;
+      }
+
+      div + p {
+        background: yellow;
+        color: #0076ff;
+      }
+
+      /* p + p {
+        background: green;
+        color: #0076ff;
+      } */
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <p>Adjacent sibling Selector(인접선택자)</p>
+    <p>Adjacent sibling Selector(인접선택자)</p>
+  </body>
+</html>

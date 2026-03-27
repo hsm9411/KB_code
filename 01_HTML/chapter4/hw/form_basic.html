@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML 폼 예시</title>
+  </head>
+  <body>
+    <h2>회원가입 폼</h2>
+
+    <div style="border: 1px solid #ccc; width: 250px">
+      <form action="/submit_form" method="POST">
+        <label for="name">이름 </label>
+        <input type="text" id="name" name="name" required />
+        <br />
+        <label>성별</label>
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">남성</label>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label for="female">여성</label><br />
+        <input type="submit" value="가입" />
+      </form>
+    </div>
+  </body>
+</html>

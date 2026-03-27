@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>인라인 스타일 바인딩</title>
+  </head>
+
+  <body>
+    <!-- Vue가 마운트될 영역 -->
+    <div id="app">
+      <!-- 
+      :style  Vue의 스타일 바인딩
+      
+      cardStyle 객체에 정의된 스타일이
+      인라인 스타일로 적용됨
+    -->
+      <div :style="cardStyle">현재 테마가 적용된 카드입니다.</div>
+
+      <br />
+
+      <!-- 버튼 클릭 시 스타일 변경 -->
+      <button @click="changeToDark">다크 테마</button>
+      <button @click="changeToLight">라이트 테마</button>
+    </div>
+
+    <!-- Vue CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      Vue.createApp({
+        // 상태 데이터
+        data() {
+          return {
+            /* 
+            스타일 객체 (JS 객체 형태)
+            - CSS 속성은 camelCase로 작성
+          */
+            cardStyle: {
+              width: "300px",
+              padding: "20px",
+              border: "1px solid #333",
+              borderRadius: "10px", // border-radius
+              backgroundColor: "#ffffff", // 배경색
+              color: "#000000", // 글자색
+            },
+          };
+        },
+
+        methods: {
+          // 다크 테마 적용
+          changeToDark() {
+            this.cardStyle.backgroundColor = "#222222";
+            this.cardStyle.color = "#ffffff";
+          },
+
+          // 라이트 테마 적용
+          changeToLight() {
+            this.cardStyle.backgroundColor = "#ffffff";
+            this.cardStyle.color = "#000000";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>v-for 활용</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- 1. 기본 배열 순회 -->
+  <h3>1. 배열 순회</h3>
+  <ul>
+    <li v-for="fruit in fruits" :key="fruit">{{ fruit }}</li>
+  </ul>
+
+  <!-- 2. index 사용 -->
+  <h3>2. index 포함</h3>
+  <ul>
+    <li v-for="(fruit, idx) in fruits" :key="fruit">
+      {{ idx }}번: {{ fruit }}
+    </li>
+  </ul>
+
+  <!-- 3. 객체 배열 -->
+  <h3>3. 객체 배열</h3>
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr><th>번호</th><th>이름</th><th>나이</th></tr>
+    </thead>
+    <tbody>
+      <tr v-for="user in users" :key="user.id">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.age }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 4. 객체 속성 순회 -->
+  <h3>4. 객체 속성 순회</h3>
+  <ul>
+    <li v-for="(value, key) in profile" :key="key">
+      {{ key }}: {{ value }}
+    </li>
+  </ul>
+
+  <!-- 5. 숫자 범위 -->
+  <h3>5. 숫자 범위 (1~5)</h3>
+  <span v-for="n in 5" :key="n">{{ n }} </span>
+
+  <!-- 6. v-for + v-if 조합 (필터링) -->
+  <h3>6. v-for에서 조건부 출력</h3>
+  <ul>
+    <template v-for="user in users" :key="user.id">
+      <li v-if="user.age >= 30">{{ user.name }} ({{ user.age }}세)</li>
+    </template>
+  </ul>
+  <small>* v-for와 v-if를 같은 태그에 쓰지 말고 template로 분리</small>
+
+  <!-- 7. 동적 추가/삭제 -->
+  <h3>7. 항목 추가/삭제</h3>
+  <input v-model="newFruit" @keyup.enter="addFruit" placeholder="과일 입력 후 Enter">
+  <button @click="addFruit">추가</button>
+  <ul>
+    <li v-for="(fruit, idx) in fruits" :key="fruit">
+      {{ fruit }}
+      <button @click="fruits.splice(idx, 1)">삭제</button>
+    </li>
+  </ul>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        fruits: ['사과', '바나나', '포도'],
+        users: [
+          { id: 1, name: '홍길동', age: 25 },
+          { id: 2, name: '김영희', age: 32 },
+          { id: 3, name: '이철수', age: 28 },
+          { id: 4, name: '박지민', age: 35 }
+        ],
+        profile: {
+          이름: '홍길동',
+          직업: '개발자',
+          도시: '서울'
+        },
+        newFruit: ''
+      }
+    },
+    methods: {
+      addFruit() {
+        if (this.newFruit.trim()) {
+          this.fruits.push(this.newFruit.trim())
+          this.newFruit = ''
+        }
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

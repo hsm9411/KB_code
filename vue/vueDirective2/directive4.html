@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>양방향 예제 1</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app3">
+  <h3>양방향 예제 1</h3>
+  <input type="text" v-model="message" />
+  <p>입력한 값 : {{ message }}</p>
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        message: "안녕하세요",
+      };
+    },
+  }).mount("#app3");
+</script>
+
+</body>
+</html>

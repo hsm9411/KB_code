@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>라이프사이클 확인</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h3>라이프사이클 훅 실행 순서</h3>
+  <p>아래 로그를 보면 각 훅이 언제 실행되는지 알 수 있습니다.</p>
+
+  <p>카운트: {{ count }}</p>
+  <button @click="count++">+1 (beforeUpdate / updated 확인)</button>
+
+  <hr>
+  <h3>실행 로그</h3>
+  <ul>
+    <li v-for="(log, idx) in logs" :key="idx">{{ log }}</li>
+  </ul>
+
+  <hr>
+  <h3>mounted에서 API 호출 예시</h3>
+  <p>로딩: {{ loading ? '로딩중...' : '완료' }}</p>
+  <ul>
+    <li v-for="post in posts" :key="post.id">{{ post.title }}</li>
+  </ul>
+
+  <hr>
+  <h3>mounted에서 타이머 시작 → unmounted에서 정리</h3>
+  <p>경과 시간: {{ seconds }}초</p>
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        count: 0,
+        logs: [],
+        posts: [],
+        loading: true,
+        seconds: 0,
+        timer: null
+      }
+    },
+
+    beforeCreate() {
+      // this.logs 아직 사용 불가 (data 등록 전)
+      console.log('1. beforeCreate - data 아직 없음')
+    },
+
+    created() {
+      this.logs.push('2. created - data 사용 가능, DOM 아직 없음')
+      console.log('2. created')
+    },
+
+    beforeMount() {
+      this.logs.push('3. beforeMount - 렌더링 직전')
+      console.log('3. beforeMount')
+    },
+
+    mounted() {
+      this.logs.push('4. mounted - 렌더링 완료! DOM 접근 가능')
+      console.log('4. mounted')
+
+      // API 호출 예시
+      fetch('https://jsonplaceholder.typicode.com/posts?_limit=3')
+        .then(res => res.json())
+        .then(data => {
+          this.posts = data
+          this.loading = false
+        })
+
+      // 타이머 시작 (unmounted에서 정리)
+      this.timer = setInterval(() => {
+        this.seconds++
+      }, 1000)
+    },
+
+    beforeUpdate() {
+      // count 변경 시 실행
+      console.log('beforeUpdate - 화면 다시 그리기 직전')
+    },
+
+    updated() {
+      console.log('updated - 화면 다시 그리기 완료')
+    },
+
+    beforeUnmount() {
+      console.log('beforeUnmount - 제거 직전')
+    },
+
+    unmounted() {
+      // 타이머 정리
+      clearInterval(this.timer)
+      console.log('unmounted - 정리 완료')
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

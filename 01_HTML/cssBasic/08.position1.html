@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box-static {
+        position: static;
+        background: gray;
+        padding: 10px;
+        color: blueviolet;
+      }
+
+      .box-relative {
+        position: relative;
+        background: greenyellow;
+        padding: 20px;
+        margin: 10px;
+        color: aquamarine;
+      }
+      .container {
+        position: fixed;
+        background: yellow;
+        padding: 20px;
+
+        bottom: 10px;
+        /* 화면 아래에서 위로 10px 이동 */
+        right: 10px;
+
+        color: cadetblue;
+        width: 300px; /* 컨테이너의 너비를 300px로 설정 */
+        height: 150px; /* 컨테이너의 높이를 150px로 설정 */
+      }
+
+      .box-absolute {
+        position: absolute;
+        background: hotpink;
+
+        width: 300px; /* 컨테이너의 너비를 300px로 설정 */
+        height: 150px; /* 컨테이너의 높이를 150px로 설정 */
+        top: -600px; /* 부모 요소의 위쪽에서 10px 떨어진 위치 */
+        left: -50px; /* 부모 요소의 왼쪽에서 20px 떨어진 위치 */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- position: static 요소 -->
+    <div class="box-static">나는 static (기본값) 요소입니다.</div>
+
+    <!-- position: relative 요소 -->
+    <div class="box-relative">나는 relative (상대 위치) 요소입니다.</div>
+
+    <!-- 부모 컨테이너 요소 (relative) -->
+    <div class="container">
+      부모 요소 (relative)
+      <!-- position: absolute 요소 -->
+      <div class="box-absolute">나는 absolute (절대 위치) 요소입니다.</div>
+    </div>
+  </body>
+</html>

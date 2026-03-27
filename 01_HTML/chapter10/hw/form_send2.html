@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <div>
+        <label for="name"
+          ><input type="checkbox" name="food" value="라면" />라면</label
+        >
+        <label for="name"
+          ><input type="checkbox" name="food" value="만두" />만두</label
+        >
+        <label for="name"
+          ><input type="checkbox" name="food" value="불고기" />불고기</label
+        >
+        <input id="btn" type="button" value="전송" />
+      </div>
+    </form>
+
+    <script>
+      let button = document.getElementById("btn");
+      let items = document.getElementById()
+      // onClick이 아니라 onclick으로 바꿔주세요!
+      button.onclick = function () {
+        let item = document.getElementById("name");
+        console.log(item.value);
+      };
+    </script>
+  </body>
+</html>

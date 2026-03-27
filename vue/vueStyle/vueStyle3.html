@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>객체 직접스타일 변경</title>
+  </head>
+  <body>
+    <div id="app">
+      <p :style="{color:textColor, fontSize: fontSize+ 'px'}">
+        글자크기가 동적으로 변경된다
+      </p>
+      <button @click="this.fontSize+=2">글자크게</button>
+      <button @click="this.fontSize-=2">글자작게</button>
+      <button @click="changeColor">색상변경</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            textColor: "red",
+            fontSize: 20,
+          };
+        },
+        methods: {
+          changeColor() {
+            this.textColor = this.textColor === "red" ? "blue" : "red";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

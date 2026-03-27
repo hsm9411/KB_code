@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>doc</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>가격 계산기</h3>
+
+      가격: <input type="number" v-model="price" /> 원<br /><br />
+      수량: <input type="number" v-model="qty" /> 개<br /><br />
+
+      <b>총액: {{ total }} 원</b><br />
+      <span style="color:gray">{{ message }}</span>
+    </div>
+
+    <script>
+      var app = Vue.createApp({
+        data() {
+          return {
+            price: 1000,
+            qty: 1,
+            total: 1000,
+            message: "",
+          };
+        },
+
+        watch: {
+          // 일반 함수 → this = Vue 인스턴스
+          price(current, old) {
+            console.log("price 변경:", old, "→", current);
+            console.log("this.qty =", this.qty);  // data의 qty에 접근 가능!
+            this.total = current * this.qty;       // data의 total도 수정 가능!
+          },
+
+          qty(current, old) {
+            console.log("qty 변경:", old, "→", current);
+            this.total = this.price * current;
+
+            // this로 다른 data 속성도 자유롭게 수정
+            if (current >= 10) {
+              this.message = "10개 이상! 할인 적용 가능";
+            } else {
+              this.message = "";
+            }
+          },
+
+          // ❌ 비교용: 화살표 함수 (주석 풀면 this가 window라서 동작 안함)
+          // price: (current, old) => {
+          //   console.log(this);          // window
+          //   console.log(this.qty);      // undefined
+          //   this.total = current * this.qty;  // NaN
+          // },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

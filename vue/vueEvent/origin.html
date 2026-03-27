@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>click 이벤트</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>현재 숫자: {{ count }}</h3>
+      <button @click="increase">증가</button>
+      <button @click="decrease">감소</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        methods: {
+          increase() {
+            this.count++;
+          },
+          decrease() {
+            this.count--;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

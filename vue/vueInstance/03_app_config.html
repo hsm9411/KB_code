@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>애플리케이션 인스턴스 설정</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <h3>앱 인스턴스에 등록한 것들 사용하기</h3>
+
+  <!-- 등록한 컴포넌트 사용 -->
+  <my-button label="저장"></my-button>
+  <my-button label="삭제"></my-button>
+
+  <hr>
+
+  <!-- 등록한 디렉티브 사용 -->
+  <p>아래 input은 페이지 로드 시 자동 포커스됩니다:</p>
+  <input v-focus placeholder="자동 포커스됨">
+
+  <hr>
+
+  <!-- 전역 속성 사용 -->
+  <p>앱 이름: {{ $appName }}</p>
+
+</div>
+
+<script>
+  const { createApp } = Vue
+
+  // ① 앱 생성
+  const app = createApp({
+    data() {
+      return { message: '메인 앱' }
+    }
+  })
+
+  // ② 컴포넌트 등록 (이 앱에서만 사용 가능)
+  app.component('my-button', {
+    props: ['label'],
+    template: `<button @click="onClick">{{ label }}</button>`,
+    methods: {
+      onClick() {
+        alert(this.label + ' 클릭!')
+      }
+    }
+  })
+
+  // ③ 커스텀 디렉티브 등록 (이 앱에서만 사용 가능)
+  app.directive('focus', {
+    mounted(el) {
+      el.focus()   // 해당 요소에 자동 포커스
+    }
+  })
+
+  // ④ 전역 속성 등록 (모든 컴포넌트에서 접근 가능)
+  app.config.globalProperties.$appName = '나의 Vue 앱'
+
+  // ⑤ 에러 핸들러 등록
+  app.config.errorHandler = (err) => {
+    console.error('앱 에러:', err.message)
+  }
+
+  // ⑥ 마운트
+  app.mount('#app')
+
+  /*
+    정리: app(애플리케이션 인스턴스)으로 할 수 있는 것들
+
+    app.component()              → 컴포넌트 등록
+    app.directive()              → 커스텀 디렉티브 등록
+    app.use()                    → 플러그인 설치 (Vue Router 등)
+    app.config.globalProperties  → 전역 속성
+    app.config.errorHandler      → 에러 처리
+    app.mount()                  → HTML 연결 + 시작
+    app.unmount()                → 앱 종료
+  */
+</script>
+
+</body>
+</html>

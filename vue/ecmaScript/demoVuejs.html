@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 디렉티브 & 라이프사이클 실습</title>
+    <style>
+      body { font-family: sans-serif; padding: 20px; }
+      section { border: 1px solid #ccc; padding: 16px; margin-bottom: 20px; border-radius: 8px; }
+      h2 { margin-top: 0; color: #333; }
+      button { margin: 4px; padding: 6px 12px; cursor: pointer; }
+      .highlight { background: yellow; font-weight: bold; }
+      .log-box {
+        background: #1e1e1e; color: #aef; font-size: 13px;
+        padding: 10px; border-radius: 6px; max-height: 180px;
+        overflow-y: auto; font-family: monospace;
+      }
+      li { margin: 4px 0; }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+
+      <!-- ========================
+           1. v-bind : 속성 바인딩
+      ========================= -->
+      <section>
+        <h2>① v-bind — 속성 바인딩</h2>
+        <p>링크 색상: <input v-model="linkColor" placeholder="red / blue / green" /></p>
+        <!-- v-bind:style 은 :style 로 줄여 쓸 수 있어요 -->
+        <a :href="url" :style="{ color: linkColor }" target="_blank">
+          클릭해서 이동 → {{ url }}
+        </a>
+      </section>
+
+      <!-- ========================
+           2. v-if / v-else-if / v-else
+      ========================= -->
+      <section>
+        <h2>② v-if / v-else-if / v-else</h2>
+        <p>점수 입력: <input type="number" v-model.number="score" min="0" max="100" /></p>
+        <p v-if="score >= 90" class="highlight">🏆 A — 우수</p>
+        <p v-else-if="score >= 80">👍 B — 양호</p>
+        <p v-else-if="score >= 70">📘 C — 보통</p>
+        <p v-else style="color:red;">❌ F — 미달 (70 미만)</p>
+        <!-- v-show : DOM은 유지, display만 토글 -->
+        <p><strong>v-show</strong> (DOM 유지): <span v-show="score >= 70">합격 표시</span></p>
+      </section>
+
+      <!-- ========================
+           3. v-for
+      ========================= -->
+      <section>
+        <h2>③ v-for — 리스트 렌더링</h2>
+        <button @click="addItem">항목 추가</button>
+        <button @click="removeItem">마지막 삭제</button>
+        <ul>
+          <!-- :key 는 필수! Vue가 효율적으로 DOM을 추적합니다 -->
+          <li v-for="(item, index) in items" :key="item.id">
+            {{ index + 1 }}. {{ item.name }}
+          </li>
+        </ul>
+        <!-- 객체 순회 -->
+        <h3>객체 v-for</h3>
+        <ul>
+          <li v-for="(value, key) in userInfo" :key="key">
+            <strong>{{ key }}</strong>: {{ value }}
+          </li>
+        </ul>
+      </section>
+
+      <!-- ========================
+           4. v-on (이벤트 핸들링)
+      ========================= -->
+      <section>
+        <h2>④ v-on (@) — 이벤트</h2>
+        <p>카운터: <strong>{{ count }}</strong></p>
+        <button @click="count++">+1 (인라인)</button>
+        <button @click="increment(5)">+5 (메서드)</button>
+        <button @click="count = 0">리셋</button>
+        <hr />
+        <!-- 이벤트 수식어 : .prevent = preventDefault -->
+        <form @submit.prevent="handleSubmit">
+          이름: <input v-model="formName" placeholder="이름 입력" />
+          <button type="submit">전송 (새로고침 없음)</button>
+        </form>
+        <p v-if="submitted">✅ 전송됨: {{ formName }}</p>
+      </section>
+
+      <!-- ========================
+           5. v-model (양방향 바인딩)
+      ========================= -->
+      <section>
+        <h2>⑤ v-model — 양방향 바인딩</h2>
+        <input v-model="text" placeholder="텍스트를 입력하세요" style="width:200px" />
+        <p>입력값: <strong>{{ text }}</strong> (길이: {{ text.length }})</p>
+        <p>
+          <input type="checkbox" v-model="agreed" id="chk" />
+          <label for="chk">약관 동의</label>
+          — {{ agreed ? '동의함' : '미동의' }}
+        </p>
+        <p>
+          좋아하는 과일:
+          <label><input type="checkbox" value="🍎 사과" v-model="fruits" /> 사과</label>
+          <label><input type="checkbox" value="🍌 바나나" v-model="fruits" /> 바나나</label>
+          <label><input type="checkbox" value="🍇 포도" v-model="fruits" /> 포도</label>
+        </p>
+        <p>선택: {{ fruits.join(', ') || '없음' }}</p>
+      </section>
+
+      <!-- ========================
+           6. computed / watch
+      ========================= -->
+      <section>
+        <h2>⑥ computed &amp; watch</h2>
+        <p>원가: <input type="number" v-model.number="price" /></p>
+        <p>수량: <input type="number" v-model.number="qty" /></p>
+        <!-- computed: 캐싱되어 관련 데이터가 바뀔 때만 재계산 -->
+        <p>합계 (computed): <strong>{{ total.toLocaleString() }}원</strong></p>
+        <p>watch 로그: <em>{{ watchLog }}</em></p>
+      </section>
+
+      <!-- ========================
+           7. 라이프사이클 로그
+      ========================= -->
+      <section>
+        <h2>⑦ 라이프사이클 훅</h2>
+        <p style="font-size:13px; color:#555;">
+          훅 실행 순서: <code>beforeCreate → created → beforeMount → mounted</code><br>
+          데이터 변경 시: <code>beforeUpdate → updated</code><br>
+          컴포넌트 해제 시: <code>beforeUnmount → unmounted</code>
+        </p>
+        <button @click="triggerUpdate">데이터 변경 (update 훅 발생)</button>
+        <div class="log-box">
+          <div v-for="(log, i) in lifecycleLogs" :key="i">{{ log }}</div>
+        </div>
+      </section>
+
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+      const app = Vue.createApp({
+        name: "App",
+
+        // ── data ──────────────────────────────────
+        data() {
+          return {
+            // v-bind
+            url: "https://vuejs.org",
+            linkColor: "blue",
+
+            // v-if
+            score: 85,
+
+            // v-for
+            nextId: 4,
+            items: [
+              { id: 1, name: "사과" },
+              { id: 2, name: "바나나" },
+              { id: 3, name: "포도" },
+            ],
+            userInfo: { 이름: "홍길동", 나이: 25, 직업: "개발자" },
+
+            // v-on
+            count: 0,
+            formName: "",
+            submitted: false,
+
+            // v-model
+            text: "",
+            agreed: false,
+            fruits: [],
+
+            // computed / watch
+            price: 1000,
+            qty: 3,
+            watchLog: "아직 변경 없음",
+
+            // lifecycle
+            lifecycleLogs: [],
+            updateDummy: 0,
+          };
+        },
+
+        // ── computed ──────────────────────────────
+        computed: {
+          total() {
+            return this.price * this.qty;
+          },
+        },
+
+        // ── watch ─────────────────────────────────
+        watch: {
+          // price 또는 qty 가 바뀌면 감지
+          total(newVal, oldVal) {
+            this.watchLog = `합계 변경: ${oldVal.toLocaleString()} → ${newVal.toLocaleString()}원`;
+          },
+        },
+
+        // ── methods ───────────────────────────────
+        methods: {
+          increment(n) {
+            this.count += n;
+          },
+          handleSubmit() {
+            this.submitted = true;
+          },
+          addItem() {
+            this.items.push({ id: this.nextId++, name: `항목 ${this.nextId - 1}` });
+          },
+          removeItem() {
+            this.items.pop();
+          },
+          triggerUpdate() {
+            this.updateDummy++;
+          },
+          log(msg) {
+            const time = new Date().toLocaleTimeString();
+            this.lifecycleLogs.push(`[${time}] ${msg}`);
+          },
+        },
+
+        // ── 라이프사이클 훅 ────────────────────────
+        beforeCreate() {
+          // data / methods 아직 없음 — console 만 사용
+          console.log("beforeCreate: 인스턴스 초기화 전");
+        },
+        created() {
+          // data, methods, computed, watch 사용 가능
+          // DOM 접근 불가
+          this.log("created ✅ — data/methods 준비됨, DOM은 아직");
+        },
+        beforeMount() {
+          this.log("beforeMount — 가상 DOM 생성, 실제 DOM 마운트 직전");
+        },
+        mounted() {
+          // 실제 DOM 접근 가능 (this.$el)
+          this.log("mounted ✅ — DOM 마운트 완료! API 호출 적기");
+        },
+        beforeUpdate() {
+          this.log("beforeUpdate — 반응형 데이터 변경, DOM 업데이트 직전");
+        },
+        updated() {
+          this.log("updated ✅ — DOM 업데이트 완료");
+        },
+        beforeUnmount() {
+          console.log("beforeUnmount: 컴포넌트 해제 직전");
+        },
+        unmounted() {
+          console.log("unmounted: 컴포넌트 해제 완료");
+        },
+      });
+
+      const vm = app.mount("#app");
+    </script>
+  </body>
+</html>

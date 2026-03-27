@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응형 네비게이션 바</title>
+    <style>
+      nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #0984e3;
+        padding: 10px;
+        gap: 10px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+      }
+
+      /* 화면 너비가 650px 이하일 때 */
+      @media (max-width: 650px) {
+        nav {
+          flex-direction: column; /* 메뉴를 세로로 배치 */
+          text-align: center;
+        }
+
+        nav a {
+          width: 100%; /* 각 메뉴가 한 줄 전체를 차지 */
+          background-color: #74b9ff;
+          box-sizing: border-box;
+        }
+      }
+
+      #size-display {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-family: sans-serif;
+        font-size: 14px;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <div id="size-display">
+      Width: <span id="width">0</span>px | Height: <span id="height">0</span>px
+    </div>
+
+    <script>
+      function updateSize() {
+        document.getElementById("width").innerText = window.innerWidth;
+        document.getElementById("height").innerText = window.innerHeight;
+      }
+
+      window.addEventListener("resize", updateSize);
+      window.addEventListener("load", updateSize);
+      updateSize();
+    </script>
+  </body>
+</html>

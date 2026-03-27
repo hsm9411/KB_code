@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>실전 예시: 회원가입 폼</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <style>
+    .error { color: red; font-size: 13px; }
+    .valid { color: green; font-size: 13px; }
+    input { display: block; margin: 4px 0 8px; padding: 6px; width: 250px; }
+  </style>
+</head>
+<body>
+
+<!--
+  이 예시에서 사용되는 인스턴스 개념:
+  - data()      → 폼 입력값, 제출 상태
+  - computed    → 유효성 검사 결과 (data 가공)
+  - methods     → 폼 제출 처리 (이벤트 동작)
+  - watch       → 비밀번호 변경 시 확인란 초기화 (사이드이펙트)
+  - mounted     → 첫 input에 자동 포커스
+  - this        → 모든 곳에서 data/computed/methods 접근
+  - $refs       → DOM 직접 접근 (포커스)
+-->
+
+<div id="app">
+  <h3>회원가입</h3>
+
+  <form @submit.prevent="submit">
+
+    <label>이름</label>
+    <input ref="nameInput" v-model="name" placeholder="2자 이상">
+    <p :class="nameValid ? 'valid' : 'error'">
+      {{ nameMsg }}
+    </p>
+
+    <label>이메일</label>
+    <input v-model="email" type="email" placeholder="example@mail.com">
+    <p :class="emailValid ? 'valid' : 'error'">
+      {{ emailMsg }}
+    </p>
+
+    <label>비밀번호</label>
+    <input v-model="password" type="password" placeholder="4자 이상">
+    <p :class="passwordValid ? 'valid' : 'error'">
+      {{ passwordMsg }}
+    </p>
+
+    <label>비밀번호 확인</label>
+    <input v-model="passwordConfirm" type="password" placeholder="동일하게 입력">
+    <p :class="confirmValid ? 'valid' : 'error'">
+      {{ confirmMsg }}
+    </p>
+
+    <button :disabled="!allValid">
+      {{ allValid ? '가입하기' : '입력을 완성해주세요' }}
+    </button>
+
+  </form>
+
+  <p v-if="submitted" style="color: green; font-weight: bold; margin-top: 16px;">
+    {{ name }}님, 가입 완료!
+  </p>
+</div>
+
+<script>
+  Vue.createApp({
+    // data: 폼에서 쓰는 모든 상태값
+    data() {
+      return {
+        name: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        submitted: false
+      }
+    },
+
+    // computed: data를 가공해서 유효성 결과를 자동 계산
+    computed: {
+      nameValid() { return this.name.length >= 2 },
+      nameMsg() {
+        if (!this.name) return '이름을 입력하세요'
+        return this.nameValid ? '확인' : '2자 이상 입력하세요'
+      },
+
+      emailValid() { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email) },
+      emailMsg() {
+        if (!this.email) return '이메일을 입력하세요'
+        return this.emailValid ? '확인' : '올바른 이메일 형식이 아닙니다'
+      },
+
+      passwordValid() { return this.password.length >= 4 },
+      passwordMsg() {
+        if (!this.password) return '비밀번호를 입력하세요'
+        return this.passwordValid ? '확인' : '4자 이상 입력하세요'
+      },
+
+      confirmValid() {
+        return this.passwordConfirm && this.password === this.passwordConfirm
+      },
+      confirmMsg() {
+        if (!this.passwordConfirm) return '비밀번호를 다시 입력하세요'
+        return this.confirmValid ? '일치' : '비밀번호가 일치하지 않습니다'
+      },
+
+      allValid() {
+        return this.nameValid && this.emailValid &&
+               this.passwordValid && this.confirmValid
+      }
+    },
+
+    // methods: 이벤트 처리
+    methods: {
+      submit() {
+        if (!this.allValid) return    // this → computed 접근
+        this.submitted = true         // this → data 접근
+        console.log('가입 정보:', {
+          name: this.name,
+          email: this.email
+        })
+      }
+    },
+
+    // watch: 비밀번호가 바뀌면 확인란 초기화
+    watch: {
+      password() {
+        this.passwordConfirm = ''     // this → data 접근
+      }
+    },
+
+    // mounted: 첫 input에 자동 포커스
+    mounted() {
+      this.$refs.nameInput.focus()    // this → $refs 접근
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue createApp 옵션 실습</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 30px; }
+    .box { border: 1px solid #ccc; padding: 16px; margin: 12px 0; border-radius: 6px; }
+    h2 { color: #42b883; }
+    label { font-weight: bold; display: block; margin-bottom: 6px; }
+    button { padding: 6px 14px; margin-top: 8px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h2>createApp 옵션 종류 실습</h2>
+
+  <div id="app">
+
+    <!-- data: 반응형 변수 -->
+    <div class="box">
+      <label>① data — 반응형 변수</label>
+      <p>이름: {{ name }}, 나이: {{ age }}</p>
+    </div>
+
+    <!-- methods: 함수 정의 -->
+    <div class="box">
+      <label>② methods — 함수</label>
+      <p>카운트: {{ count }}</p>
+      <button @click="increase">+1 증가</button>
+      <button @click="reset">초기화</button>
+    </div>
+
+    <!-- computed: data를 가공한 계산된 값 -->
+    <div class="box">
+      <label>③ computed — 계산된 값 (data 가공)</label>
+      <p>카운트 두 배: {{ doubleCount }}</p>
+      <p>카운트 상태: {{ countStatus }}</p>
+    </div>
+
+    <!-- watch: 변수 변화를 감시 -->
+    <div class="box">
+      <label>④ watch — 값 변화 감시</label>
+      <p>로그: {{ watchLog }}</p>
+      <small>* +1 버튼을 누르면 watch가 count 변화를 감지합니다</small>
+    </div>
+
+    <!-- mounted: 화면이 준비된 직후 실행 -->
+    <div class="box">
+      <label>⑤ mounted — 화면 준비 직후 실행 (라이프사이클)</label>
+      <p>{{ mountedMsg }}</p>
+    </div>
+
+  </div>
+
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+
+      // ① 반응형 변수 정의
+      data() {
+        return {
+          name: '홍길동',
+          age: 25,
+          count: 0,
+          watchLog: '아직 변화 없음',
+          mountedMsg: ''
+        }
+      },
+
+      // ② 함수 정의 (버튼 클릭 등 이벤트 처리)
+      methods: {
+        increase() {
+          this.count++
+        },
+        reset() {
+          this.count = 0
+        }
+      },
+
+      // ③ data를 기반으로 자동 계산되는 값
+      //    count가 바뀌면 자동으로 재계산됨
+      computed: {
+        doubleCount() {
+          return this.count * 2
+        },
+        countStatus() {
+          return this.count >= 5 ? '5 이상!' : '5 미만'
+        }
+      },
+
+      // ④ 특정 변수를 감시 — 값이 바뀔 때마다 실행
+      watch: {
+        count(newVal, oldVal) {
+          this.watchLog = `count 변화 감지: ${oldVal} → ${newVal}`
+        }
+      },
+
+      // ⑤ 라이프사이클 훅 — 화면이 마운트된 직후 한 번 실행
+      mounted() {
+        this.mountedMsg = '페이지가 준비되었습니다! (mounted 실행됨)'
+      }
+
+    }).mount('#app')
+  </script>
+
+</body>
+</html>

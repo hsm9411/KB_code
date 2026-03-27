@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>computed vs methods vs watch</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- 기본 data -->
+  <h3>data</h3>
+  <p>firstName: <input v-model="firstName"></p>
+  <p>lastName: <input v-model="lastName"></p>
+  <p>가격: <input v-model.number="price" type="number"></p>
+  <p>수량: <input v-model.number="qty" type="number"></p>
+
+  <hr>
+
+  <!-- computed: data를 가공해서 보여주기 -->
+  <h3>computed (자동 계산, 캐싱)</h3>
+  <p>전체 이름: {{ fullName }}</p>
+  <p>합계 금액: {{ total }}원</p>
+  <p>할인 적용 (10% 이상 시 5%): {{ discountedTotal }}원</p>
+
+  <hr>
+
+  <!-- methods: 호출해야 실행 -->
+  <h3>methods (호출 시 실행, 캐싱 없음)</h3>
+  <p>전체 이름 (method): {{ getFullName() }}</p>
+  <button @click="alert('클릭!')">alert 실행</button>
+
+  <hr>
+
+  <!-- watch: 변화 감지 → 사이드이펙트 -->
+  <h3>watch (변화 감지)</h3>
+  <p>검색어: <input v-model="keyword" placeholder="입력하면 watch 작동"></p>
+  <p>watch 로그: {{ watchLog }}</p>
+  <p>호출 횟수: {{ watchCount }}회</p>
+
+  <hr>
+
+  <!-- 실전: 검색 필터 (computed 활용) -->
+  <h3>실전 예제: 검색 필터</h3>
+  <input v-model="search" placeholder="과일 검색">
+  <ul>
+    <li v-for="item in filteredFruits" :key="item">{{ item }}</li>
+  </ul>
+  <p v-if="filteredFruits.length === 0">결과 없음</p>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        firstName: '길동',
+        lastName: '홍',
+        price: 1000,
+        qty: 3,
+        keyword: '',
+        watchLog: '',
+        watchCount: 0,
+        search: '',
+        fruits: ['사과', '바나나', '포도', '수박', '딸기', '사탕수수']
+      }
+    },
+
+    computed: {
+      fullName() {
+        return this.lastName + this.firstName
+      },
+      total() {
+        return this.price * this.qty
+      },
+      discountedTotal() {
+        const t = this.total
+        return t >= 10000 ? Math.floor(t * 0.95) : t
+      },
+      filteredFruits() {
+        if (!this.search) return this.fruits
+        return this.fruits.filter(f => f.includes(this.search))
+      }
+    },
+
+    methods: {
+      getFullName() {
+        return this.lastName + this.firstName
+      },
+      alert(msg) {
+        window.alert(msg)
+      }
+    },
+
+    watch: {
+      keyword(newVal, oldVal) {
+        this.watchCount++
+        this.watchLog = `"${oldVal}" → "${newVal}"`
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

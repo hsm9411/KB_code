@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Event 종합 예제</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .image-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      img {
+        max-width: 300px;
+        height: auto;
+        transition:
+          transform 0.5s,
+          width 0.5s;
+      }
+
+      .control-panel {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Input 타입별 이벤트 처리 예제</h1>
+
+    <!-- Text Input -->
+    <div class="control-panel">
+      <label for="textInput">텍스트 입력: </label>
+      <input
+        type="text"
+        id="textInput"
+        placeholder="이미지 설명을 입력하세요"
+      />
+      <span id="textDisplay"></span>
+    </div>
+
+    <!-- File Input -->
+    <div class="control-panel">
+      <label for="fileInput">이미지 파일 선택: </label>
+      <input type="file" id="fileInput" accept="image/*" />
+    </div>
+
+    <!-- Range Input -->
+    <div class="control-panel">
+      <label for="rangeInput">이미지 크기 조절: </label>
+      <input type="range" id="rangeInput" min="100" max="500" value="300" />
+      <span id="rangeValue">300px</span>
+    </div>
+
+    <!-- Checkbox -->
+    <div class="control-panel">
+      <label>
+        <input type="checkbox" id="rotateCheckbox" />
+        이미지 회전
+      </label>
+    </div>
+
+    <!-- Radio Buttons -->
+    <div class="control-panel">
+      <p>이미지 선택:</p>
+      <label>
+        <input
+          type="radio"
+          name="imageChoice"
+          value="../images/apple.jpg"
+          checked
+        />
+        이미지 1
+      </label>
+      <label>
+        <input type="radio" name="imageChoice" value="../images/apple.jpg" />
+        이미지 2
+      </label>
+      <label>
+        <input type="radio" name="imageChoice" value="../images/apple.jpg" />
+        이미지 3
+      </label>
+    </div>
+
+    <!-- 이미지 표시 영역 -->
+    <div class="image-container">
+      <img id="displayImage" src="../images/apple.jpg" alt="선택된 이미지" />
+      <p id="imageDescription">이미지 설명이 여기에 표시됩니다.</p>
+    </div>
+
+    <script>
+      // 요소 가져오기
+      const textInput = document.getElementById("textInput");
+      const textDisplay = document.getElementById("textDisplay");
+      const fileInput = document.getElementById("fileInput");
+      const rangeInput = document.getElementById("rangeInput");
+      const rangeValue = document.getElementById("rangeValue");
+      const rotateCheckbox = document.getElementById("rotateCheckbox");
+      const imageChoiceRadios = document.getElementsByName("imageChoice");
+      const displayImage = document.getElementById("displayImage");
+      const imageDescription = document.getElementById("imageDescription");
+
+      // Text Input 이벤트: 이미지 설명 표시
+      textInput.addEventListener("input", () => {
+        textDisplay.textContent = `설명: ${textInput.value}`;
+        imageDescription.textContent = textInput.value;
+      });
+
+      // File Input 이벤트: 이미지 파일 표시
+      fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            displayImage.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Range Input 이벤트: 이미지 크기 조절
+      rangeInput.addEventListener("input", () => {
+        const size = rangeInput.value;
+        rangeValue.textContent = `${size}px`;
+        displayImage.style.width = `${size}px`;
+      });
+
+      // Checkbox 이벤트: 이미지 회전
+      rotateCheckbox.addEventListener("change", () => {
+        if (rotateCheckbox.checked) {
+          displayImage.style.transform = "rotate(180deg)";
+        } else {
+          displayImage.style.transform = "rotate(0deg)";
+        }
+      });
+
+      // Radio Button 이벤트: 이미지 교체  //[][][]
+      imageChoiceRadios.forEach((radio) => {
+        radio.addEventListener("change", (event) => {
+          displayImage.src = event.target.value;
+        });
+      });
+    </script>
+  </body>
+</html>

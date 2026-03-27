@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>이벤트 처리</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- 1. 기본 클릭 -->
+  <h3>1. 클릭 이벤트</h3>
+  <p>카운트: {{ count }}</p>
+  <button @click="count++">인라인 +1</button>
+  <button @click="increase">메서드 +1</button>
+  <button @click="addAmount(5)">+5 (인자 전달)</button>
+
+  <hr>
+
+  <!-- 2. 이벤트 객체 ($event) -->
+  <h3>2. 이벤트 객체</h3>
+  <button @click="showEvent($event)">클릭하면 이벤트 정보 출력</button>
+  <p>{{ eventInfo }}</p>
+
+  <hr>
+
+  <!-- 3. 키보드 이벤트 -->
+  <h3>3. 키보드 이벤트</h3>
+  <input @keyup.enter="onEnter" placeholder="Enter 누르면 실행" v-model="typed">
+  <input @keyup.esc="typed = ''" placeholder="Esc 누르면 초기화" v-model="typed">
+  <p>입력값: {{ typed }}</p>
+  <p>{{ keyMsg }}</p>
+
+  <hr>
+
+  <!-- 4. 수식어 - prevent -->
+  <h3>4. @submit.prevent (폼 새로고침 방지)</h3>
+  <form @submit.prevent="onSubmit">
+    <input v-model="formName" placeholder="이름">
+    <button type="submit">제출</button>
+  </form>
+  <p>{{ submitMsg }}</p>
+
+  <hr>
+
+  <!-- 5. 수식어 - stop (버블링 차단) -->
+  <h3>5. @click.stop (버블링 차단)</h3>
+  <div @click="log = '외부 div 클릭됨'" style="padding: 20px; background: #eee;">
+    외부 div
+    <button @click.stop="log = '버튼만 클릭됨 (stop)'">
+      stop 버튼
+    </button>
+    &nbsp;
+    <button @click="log = '버튼 클릭 → 외부도 실행됨'">
+      일반 버튼
+    </button>
+  </div>
+  <p>{{ log }}</p>
+
+  <hr>
+
+  <!-- 6. 수식어 - once -->
+  <h3>6. @click.once (한 번만 실행)</h3>
+  <button @click.once="onceCount++">클릭 (once): {{ onceCount }}</button>
+
+  <hr>
+
+  <!-- 7. 마우스 이벤트 -->
+  <h3>7. 마우스 이벤트</h3>
+  <div
+    @mouseover="mouseMsg = 'mouseover!'"
+    @mouseout="mouseMsg = ''"
+    style="padding: 20px; background: #ddd; display: inline-block;"
+  >
+    마우스 올려보세요
+  </div>
+  <p>{{ mouseMsg }}</p>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        count: 0,
+        eventInfo: '',
+        typed: '',
+        keyMsg: '',
+        formName: '',
+        submitMsg: '',
+        log: '',
+        onceCount: 0,
+        mouseMsg: ''
+      }
+    },
+    methods: {
+      increase() {
+        this.count++
+      },
+      addAmount(n) {
+        this.count += n
+      },
+      showEvent(e) {
+        this.eventInfo = `타입: ${e.type}, 좌표: (${e.clientX}, ${e.clientY})`
+      },
+      onEnter() {
+        this.keyMsg = `Enter! 입력값: ${this.typed}`
+      },
+      onSubmit() {
+        this.submitMsg = `제출됨: ${this.formName} (페이지 새로고침 없음)`
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

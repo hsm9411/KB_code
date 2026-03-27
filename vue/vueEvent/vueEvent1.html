@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>click 이벤트</title>
+  </head>
+  <body>
+    <div id="app">
+      <input
+        type="text"
+        :value="name"
+        @input="changeName"
+        placeholder="이름을 입력하세요"
+      />
+      <p>입력한 이름:{{name}}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            name: "",
+          };
+        },
+        methods: {
+          changeName(e) {
+            this.name = e.target.value;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

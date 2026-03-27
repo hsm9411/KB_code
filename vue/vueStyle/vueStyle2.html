@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>click 이벤트</title>
+  </head>
+  <body>
+    <div id="app">
+      <div :style="cardStyle">현재 테마가 적용된 카드입니다</div>
+      <br />
+      <button @click="changeToDark">다크 테마</button>
+      <button @click="changeToLight">라이트 테마</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            cardStyle: {
+              width: "300px",
+              padding: "20px",
+              border: "1px solid #333",
+              borderRadius: "10px", // border-radius
+              backgroundColor: "#ffffff", // 배경색
+              color: "#000000", // 글자색
+            },
+          };
+        },
+        methods: {
+          changeToDark() {
+            this.cardStyle.backgroundColor = "#222222";
+            this.cardStyle.color = "#ffffff";
+          },
+          changeToLight() {
+            this.cardStyle.backgroundColor = "#ffffff";
+            this.cardStyle.color = "#222222";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

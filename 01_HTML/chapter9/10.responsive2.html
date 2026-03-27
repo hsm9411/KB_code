@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- 문서 문자 인코딩 설정 (한글 깨짐 방지) -->
+    <meta charset="UTF-8" />
+
+    <!-- 반응형 웹을 위한 viewport 설정
+       모바일에서 화면 크기에 맞게 페이지를 조정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>반응형 이미지</title>
+
+    <style>
+      /* 이미지 스타일 */
+      img {
+        /* 부모 요소 너비에 맞게 이미지 크기 조정 */
+        width: 100%;
+
+        /* 이미지 비율 유지 (가로가 줄어들면 세로도 비율에 맞게 자동 조정) */
+        height: auto;
+
+        /* 이미지가 600px 이상 커지지 않도록 제한 */
+        max-width: 600px;
+
+        /* block 요소로 변경 (margin auto를 사용하기 위해) */
+        display: block;
+
+        /* 이미지를 가운데 정렬 */
+        margin: 0 auto;
+      }
+
+      /* 화면 오른쪽 위에 표시될 정보 박스 스타일 */
+      #size-display {
+        /* 화면에 고정 위치 */
+        position: fixed;
+
+        /* 위쪽에서 10px */
+        top: 10px;
+
+        /* 오른쪽에서 10px */
+        right: 10px;
+
+        /* 반투명 검정 배경 */
+        background: rgba(0, 0, 0, 0.7);
+
+        /* 글자 색상 */
+        color: white;
+
+        /* 내부 여백 */
+        padding: 8px 12px;
+
+        /* 둥근 모서리 */
+        border-radius: 5px;
+
+        /* 글꼴 */
+        font-family: sans-serif;
+
+        /* 글자 크기 */
+        font-size: 14px;
+
+        /* 다른 요소 위에 표시 */
+        z-index: 9999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 제목 -->
+    <h1>반응형 이미지</h1>
+
+    <!--
+  반응형 이미지
+
+  picsum.photos는 랜덤 이미지를 제공하는 사이트
+  /600 은 가로 600px 이미지를 의미
+-->
+    <img id="responsiveImg" src="https://picsum.photos/600" alt="예제 이미지" />
+
+    <!--
+  화면 오른쪽 위에 표시될 정보
+  브라우저 크기와 이미지 실제 크기를 표시
+-->
+    <div id="size-display">
+      브라우저 Width: <span id="width">0</span>px | Height:
+      <span id="height">0</span>px <br />
+
+      이미지 Width: <span id="imgWidth">0</span>px | Height:
+      <span id="imgHeight">0</span>px
+    </div>
+
+    <script>
+      /*
+  브라우저 크기와 이미지 크기를 업데이트하는 함수
+*/
+      function updateSize() {
+        // 현재 브라우저 내부 너비
+        document.getElementById("width").innerText = window.innerWidth;
+
+        // 현재 브라우저 내부 높이
+        document.getElementById("height").innerText = window.innerHeight;
+
+        // 이미지 객체 가져오기
+        const img = document.getElementById("responsiveImg");
+
+        // 이미지 실제 표시 너비
+        document.getElementById("imgWidth").innerText = img.clientWidth;
+
+        // 이미지 실제 표시 높이
+        document.getElementById("imgHeight").innerText = img.clientHeight;
+      }
+
+      /*
+  브라우저 창 크기가 변경될 때 실행
+*/
+      window.addEventListener("resize", updateSize);
+
+      /*
+  페이지 로딩이 끝나면 실행
+*/
+      window.addEventListener("load", updateSize);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // let x = 10;
+      // if (true) {
+      //   // var = 30;
+      //   // var = 20; 둘다 var인경우 가능하다
+      //   let x = 20;
+      //   // let x = 30;
+      //   console.log(x);
+      // }
+      // console.log(x);
+
+      function greet(name = "greet") {
+        return `Hello,${name}`;
+      }
+      console.log(greet());
+      console.log(greet("ttt"));
+
+      function sum(a=0, ...ns){
+        
+      }
+
+      sum(10,20,30,40,50,60)
+
+
+
+    </script>
+  </body>
+</html>

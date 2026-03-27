@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>검색 + 정렬 테이블</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+  <style>
+    table { border-collapse: collapse; width: 100%; max-width: 600px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { cursor: pointer; background: #f5f5f5; }
+    th:hover { background: #e0e0e0; }
+    .sort-active { color: #42b883; }
+  </style>
+</head>
+<body>
+
+<div id="app">
+
+  <h3>직원 목록</h3>
+
+  <!-- 검색 (v-model) -->
+  <input v-model="keyword" placeholder="이름 또는 부서 검색">
+  <p>{{ filteredEmployees.length }}명 표시</p>
+
+  <!-- 테이블 (v-for + computed + @click 정렬) -->
+  <table>
+    <thead>
+      <tr>
+        <th @click="sortBy('name')" :class="{ 'sort-active': sortKey === 'name' }">
+          이름 {{ sortKey === 'name' ? (sortAsc ? '▲' : '▼') : '' }}
+        </th>
+        <th @click="sortBy('dept')" :class="{ 'sort-active': sortKey === 'dept' }">
+          부서 {{ sortKey === 'dept' ? (sortAsc ? '▲' : '▼') : '' }}
+        </th>
+        <th @click="sortBy('salary')" :class="{ 'sort-active': sortKey === 'salary' }">
+          연봉 {{ sortKey === 'salary' ? (sortAsc ? '▲' : '▼') : '' }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="emp in filteredEmployees" :key="emp.id">
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.dept }}</td>
+        <td>{{ emp.salary.toLocaleString() }}만원</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p v-if="filteredEmployees.length === 0">검색 결과 없음</p>
+
+  <!-- 통계 (computed) -->
+  <p v-else>
+    평균 연봉: {{ avgSalary.toLocaleString() }}만원
+  </p>
+
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        keyword: '',
+        sortKey: '',
+        sortAsc: true,
+        employees: [
+          { id: 1, name: '홍길동', dept: '개발팀', salary: 5000 },
+          { id: 2, name: '김영희', dept: '디자인팀', salary: 4500 },
+          { id: 3, name: '이철수', dept: '개발팀', salary: 5500 },
+          { id: 4, name: '박지민', dept: '기획팀', salary: 4000 },
+          { id: 5, name: '최수정', dept: '디자인팀', salary: 4800 },
+          { id: 6, name: '강민호', dept: '개발팀', salary: 6000 },
+          { id: 7, name: '윤서연', dept: '기획팀', salary: 4200 }
+        ]
+      }
+    },
+
+    computed: {
+      // 검색 + 정렬이 결합된 결과
+      filteredEmployees() {
+        let result = this.employees
+
+        // 1단계: 검색 필터
+        if (this.keyword) {
+          const kw = this.keyword.toLowerCase()
+          result = result.filter(e =>
+            e.name.includes(kw) || e.dept.includes(kw)
+          )
+        }
+
+        // 2단계: 정렬
+        if (this.sortKey) {
+          const key = this.sortKey
+          const asc = this.sortAsc
+          result = [...result].sort((a, b) => {
+            if (a[key] < b[key]) return asc ? -1 : 1
+            if (a[key] > b[key]) return asc ? 1 : -1
+            return 0
+          })
+        }
+
+        return result
+      },
+
+      avgSalary() {
+        const list = this.filteredEmployees
+        if (list.length === 0) return 0
+        const sum = list.reduce((acc, e) => acc + e.salary, 0)
+        return Math.round(sum / list.length)
+      }
+    },
+
+    methods: {
+      sortBy(key) {
+        if (this.sortKey === key) {
+          this.sortAsc = !this.sortAsc  // 같은 열 클릭 → 방향 전환
+        } else {
+          this.sortKey = key
+          this.sortAsc = true
+        }
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

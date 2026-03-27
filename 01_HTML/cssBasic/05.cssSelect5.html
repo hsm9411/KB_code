@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CSS Selector : Child Selector(자식선택자)</title>
+    <style>
+      div,
+      p {
+        padding: 10px;
+        margin: 10px;
+        font-weight: bold;
+      }
+
+      div {
+        background: #0076ff;
+      }
+
+      div > div {
+        background: #fc6aad;
+        color: #0076ff;
+      }
+
+      div > p {
+        background: #ffb100;
+        color: #0076ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>Child Selector(자식선택자)</p>
+      <div>Child Selector(자식선택자)</div>
+      <h1>
+        <p>자손선택자는 자식선택자 CSS룰이 적용되지 않음.</p>
+      </h1>
+    </div>
+  </body>
+</html>

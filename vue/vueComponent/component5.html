@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>component</title>
+  </head>
+  <body>
+    <div id="app">
+      <child-component v-on:show-log="printText"></child-component>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      var app = Vue.createApp({
+        name: "App",
+        data() {
+          return {
+            message: "소리없는 아우성!",
+          };
+        },
+        methods: {
+          printText(...args) {
+            alert(args[0]);
+          },
+        },
+      });
+
+      app.component("child-component", {
+        data() {
+          return {};
+        },
+        methods: {
+          showLog() {
+            // alert('버튼이 눌렸어요!')
+            // (프로그램적으로)이벤트를 발생시킬꺼예요!
+            this.$emit("show-log", 100, 200, 300, 400, 500);
+          },
+        },
+        template: '<button v-on:click="showLog">클릭클릭!!</button>',
+      });
+
+      var vm = app.mount("#app");
+    </script>
+  </body>
+</html>

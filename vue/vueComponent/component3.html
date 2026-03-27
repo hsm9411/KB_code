@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>component</title>
+  </head>
+  <body>
+    <div id="app">
+      <number-component v-bind:num="count"></number-component>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      var app = Vue.createApp({
+        name: "App",
+        data() {
+          return {
+            count: 10,
+          };
+        },
+      });
+
+      app.component("number-component", {
+        props: {
+          num: Number,
+        },
+        template: `<p>전달 받은 값: {{ num }}</p>
+        <p>2배 값: {{ num * 2 }}</p>
+        `,
+      });
+
+      var vm = app.mount("#app");
+    </script>
+  </body>
+</html>

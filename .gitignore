@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Images & media (학습용 로컬 리소스)
+images/
+
+# package-lock (선택: 팀 프로젝트라면 아래 줄 삭제)
+package-lock.json

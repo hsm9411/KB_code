@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>양방향 예제 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      잔고: <input type="number" v-model="balance" /><br /><br />
+      <p v-text="balance"></p>
+      회원등급:
+      <span v-if="balance > 100000">Gold</span>
+      <span v-else-if="balance>= 50000">Silver</span>
+      <span v-else-if="balance>=10000">Bronze</span>
+      <span v-else>Basic</span>
+    </div>
+
+    <script>
+      var app = Vue.createApp({
+        name: "App",
+        data() {
+          return {
+            balance: 0,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

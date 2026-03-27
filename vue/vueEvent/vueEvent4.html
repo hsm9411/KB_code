@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>click 이벤트</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="outer" @click="outerClick">
+        outer
+        <div id="inner" @click.stop="innerClick">inner</div>
+      </div>
+      <p>{{log}}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            log: "",
+          };
+        },
+        methods: {
+          outerClick(e) {
+            this.log += "outer Click ";
+          },
+          innerClick(e) {
+            this.log += "inner Click ";
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
