@@ -27,17 +27,20 @@
     </p>
 
     <MenuList :items="tasks" />
+    <MenuList2 :items="tasks" />
   </section>
 </template>
 
 <script>
 import { computed } from "vue";
 import MenuList from "../components/provide/MenuList.vue";
+import MenuList2 from "@/components/provide/MenuList2.vue";
 
 export default {
   name: "ProvideInjectExample",
   components: {
     MenuList,
+    MenuList2,
   },
   data() {
     return {
