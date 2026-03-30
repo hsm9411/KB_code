@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인 안정성 실습</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card">
+        <h1>로그인</h1>
+
+        <input type="text" id="userId" placeholder="아이디 입력" />
+        <input type="password" id="userPw" placeholder="비밀번호 입력" />
+
+        <button id="loginBtn">로그인</button>
+
+        <div class="message error hidden" id="errorBox"></div>
+        <div class="message success hidden" id="successBox"></div>
+        <a href="#" class="helper-link hidden" id="helperLink">비밀번호 찾기</a>
+      </section>
+    </main>
+
+    <script src="scipt_answer.js"></script>
+  </body>
+</html>

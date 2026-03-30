@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>논리적 그룹핑이 깨진 화면</title>
+    <link rel="stylesheet" href="step1.css" />
+  </head>
+  <body>
+    <div class="slide">
+      <h1 class="title bad">논리적 그룹핑이 깨진 화면</h1>
+
+      <div class="form-box">
+        <div class="field-group">상품 정보</div>
+        <hr />
+        <div class="field">
+          <label>상품 옵션</label>
+          <select>
+            <option>옵션 선택</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>수량</label>
+          <input type="number" value="1" />
+        </div>
+
+        <div class="field-group">배송 정보</div>
+        <hr />
+        <div class="field">
+          <label>받는 사람</label>
+          <input type="text" />
+        </div>
+
+        <div class="field">
+          <label>연락처</label>
+          <input type="text" />
+        </div>
+
+        <div class="field">
+          <label>배송 메시지</label>
+          <input type="text" />
+        </div>
+
+        <div class="field">
+          <label>배송 주소</label>
+          <input type="text" />
+        </div>
+
+        <div class="field-group">결제 정보</div>
+        <hr />
+        <div class="field">
+          <label>결제 수단</label>
+          <div class="radio-group">
+            <label><input type="radio" name="pay" /> 카드</label>
+            <label><input type="radio" name="pay" /> 간편결제</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>쿠폰 코드</label>
+          <input type="text" placeholder="쿠폰 입력" />
+        </div>
+
+        <div class="field">
+          <label>포인트 사용</label>
+          <input type="text" placeholder="사용할 포인트 입력" />
+        </div>
+
+        <div class="button-group">
+          <button class="green">결제하기</button>
+        </div>
+      </div>
+
+      <p class="caption">
+        사용자는 지금 <strong>상품을 고르는 중인지</strong>,
+        <strong>결제 중인지</strong> 판단하기 어렵다
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CTA 실습2</title>
+    <link rel="stylesheet" href="cart.css" />
+  </head>
+
+  <body>
+    <div class="mission">
+      <h2>실습 문제2</h2>
+      <p>현재 버튼은 사용자가 바로 이해하고 행동하기 어려운 상태입니다.</p>
+      <p>CTA를 중심으로, 화면 전체의 UX를 개선해보세요.</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="title">장바구니</div>
+        <div class="item">
+          <span>키보드</span>
+          <span>89,000원</span>
+        </div>
+
+        <div class="item">
+          <span>마우스</span>
+          <span>45,000원</span>
+        </div>
+
+        <div class="total">
+          <span>총 금액</span>
+          <span>134,000원</span>
+        </div>
+
+        <div class="btn-group">
+          <button id="checkoutBtn">확인</button>
+          <button>진행</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const checkoutBtn = document.getElementById("checkoutBtn");
+
+      checkoutBtn.addEventListener("click", () => {
+        checkoutBtn.textContent = "결제 페이지로 이동 중...";
+        checkoutBtn.disabled = true;
+
+        setTimeout(() => {
+          alert("안전하게 연결되었습니다");
+          location.reload();
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>

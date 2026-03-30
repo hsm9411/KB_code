@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>배달 앱 - 나쁜 UX</title>
+    <link rel="stylesheet" href="menu-bad.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="panel">
+        <h2>❌ 나쁜 UX</h2>
+        <p>
+          사용자는 한 화면에서 카테고리, 필터, 가게, 메뉴, 옵션을 모두 동시에
+          처리해야 합니다. 이런 화면을 보면 사용자는 지금 내가 할 일이 메뉴를
+          고르는 것인지, 옵션을 고르는 것인지, 아니면 다른 가게와 비교하는
+          것인지 바로 판단하기 어렵습니다. 즉, 메뉴를 선택하는 행동 자체에
+          집중하지 못하게 됩니다.
+        </p>
+
+        <div class="section-title">카테고리</div>
+        <div class="tag-list" id="categoryList">
+          <div class="tag" data-value="치킨">치킨</div>
+          <div class="tag" data-value="피자">피자</div>
+          <div class="tag" data-value="햄버거">햄버거</div>
+          <div class="tag" data-value="한식">한식</div>
+          <div class="tag" data-value="중식">중식</div>
+          <div class="tag" data-value="일식">일식</div>
+          <div class="tag" data-value="분식">분식</div>
+          <div class="tag" data-value="디저트">디저트</div>
+        </div>
+
+        <div class="section-title">필터</div>
+        <div class="filter-box" id="filterList">
+          <div class="filter-item" data-value="가격순">가격순</div>
+          <div class="filter-item" data-value="평점순">평점순</div>
+          <div class="filter-item" data-value="리뷰 많은순">리뷰 많은순</div>
+          <div class="filter-item" data-value="할인 중">할인 중</div>
+          <div class="filter-item" data-value="1인분 가능">1인분 가능</div>
+          <div class="filter-item" data-value="쿠폰 가능">쿠폰 가능</div>
+        </div>
+
+        <div class="section-title">가게 + 메뉴 + 옵션 한 번에 보기</div>
+        <div class="dense-list" id="storeList">
+          <div
+            class="dense-item"
+            data-store="치킨천국"
+            data-menu="후라이드"
+            data-option="콜라 추가"
+          >
+            <strong>치킨천국</strong>
+            후라이드 / 양념 / 반반 / 콜라추가 / 사이즈선택
+          </div>
+          <div
+            class="dense-item"
+            data-store="피자월드"
+            data-menu="페퍼로니 피자"
+            data-option="치즈크러스트"
+          >
+            <strong>피자월드</strong>
+            페퍼로니 / 포테이토 / 라지변경 / 치즈크러스트
+          </div>
+          <div
+            class="dense-item"
+            data-store="한식마을"
+            data-menu="제육덮밥"
+            data-option="계란 추가"
+          >
+            <strong>한식마을</strong>
+            제육덮밥 / 불고기 / 김치찌개 / 계란추가
+          </div>
+          <div
+            class="dense-item"
+            data-store="분식하우스"
+            data-menu="떡볶이"
+            data-option="맵기 선택"
+          >
+            <strong>분식하우스</strong>
+            떡볶이 / 순대 / 튀김 / 세트메뉴 / 맵기선택
+          </div>
+          <div
+            class="dense-item"
+            data-store="버거팩토리"
+            data-menu="치즈버거 세트"
+            data-option="소스 선택"
+          >
+            <strong>버거팩토리</strong>
+            치즈버거 / 감자세트 / 음료변경 / 소스선택
+          </div>
+          <div
+            class="dense-item"
+            data-store="디저트카페"
+            data-menu="케이크"
+            data-option="음료 추가"
+          >
+            <strong>디저트카페</strong>
+            케이크 / 마카롱 / 쿠키 / 음료추가
+          </div>
+        </div>
+
+        <div class="section-title">추가 옵션</div>
+        <div class="option-list" id="optionList">
+          <div class="option-card" data-value="기본 옵션">기본 옵션</div>
+          <div class="option-card" data-value="콜라 추가">콜라 추가</div>
+          <div class="option-card" data-value="치즈 추가">치즈 추가</div>
+          <div class="option-card" data-value="사이즈 업">사이즈 업</div>
+        </div>
+
+        <div class="summary" id="summaryBox">
+          <strong>선택 요약</strong><br />
+          카테고리: 선택 안 됨<br />
+          필터: 선택 안 됨<br />
+          가게: 선택 안 됨<br />
+          메뉴: 선택 안 됨<br />
+          옵션: 선택 안 됨
+        </div>
+        <div class="action-box">
+          <button class="btn-result" onclick="showResult()">결과 보기</button>
+        </div>
+        <div class="result-box hidden" id="resultBox"></div>
+      </div>
+    </div>
+
+    <script>
+      let selectedCategory = "";
+      let selectedFilter = "";
+      let selectedStore = "";
+      let selectedMenu = "";
+      let selectedOption = "";
+
+      const summaryBox = document.getElementById("summaryBox");
+      const resultBox = document.getElementById("resultBox");
+
+      document.querySelectorAll("#categoryList .tag").forEach((tag) => {
+        tag.addEventListener("click", () => {
+          document.querySelectorAll("#categoryList .tag").forEach((item) => {
+            item.classList.remove("selected");
+          });
+          tag.classList.add("selected");
+          selectedCategory = tag.dataset.value;
+          updateSummary();
+        });
+      });
+
+      document
+        .querySelectorAll("#filterList .filter-item")
+        .forEach((filter) => {
+          filter.addEventListener("click", () => {
+            document
+              .querySelectorAll("#filterList .filter-item")
+              .forEach((item) => {
+                item.classList.remove("selected");
+              });
+            filter.classList.add("selected");
+            selectedFilter = filter.dataset.value;
+            updateSummary();
+          });
+        });
+
+      document.querySelectorAll("#storeList .dense-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          document
+            .querySelectorAll("#storeList .dense-item")
+            .forEach((card) => {
+              card.classList.remove("selected");
+            });
+          item.classList.add("selected");
+          selectedStore = item.dataset.store;
+          selectedMenu = item.dataset.menu;
+          if (!selectedOption) {
+            selectedOption = item.dataset.option;
+          }
+          updateSummary();
+        });
+      });
+
+      document
+        .querySelectorAll("#optionList .option-card")
+        .forEach((option) => {
+          option.addEventListener("click", () => {
+            document
+              .querySelectorAll("#optionList .option-card")
+              .forEach((item) => {
+                item.classList.remove("selected");
+              });
+            option.classList.add("selected");
+            selectedOption = option.dataset.value;
+            updateSummary();
+          });
+        });
+
+      function updateSummary() {
+        summaryBox.innerHTML = `
+          <strong>선택 요약</strong><br />
+          카테고리: ${selectedCategory || "선택 안 됨"}<br />
+          필터: ${selectedFilter || "선택 안 됨"}<br />
+          가게: ${selectedStore || "선택 안 됨"}<br />
+          메뉴: ${selectedMenu || "선택 안 됨"}<br />
+          옵션: ${selectedOption || "선택 안 됨"}
+        `;
+      }
+
+      function showResult() {
+        resultBox.classList.remove("hidden");
+        resultBox.innerHTML = `
+          <strong>주문 결과</strong><br />
+          카테고리: ${selectedCategory || "선택 안 됨"}<br />
+          필터: ${selectedFilter || "선택 안 됨"}<br />
+          가게: ${selectedStore || "선택 안 됨"}<br />
+          메뉴: ${selectedMenu || "선택 안 됨"}<br />
+          옵션: ${selectedOption || "선택 안 됨"}<br /><br />
+          선택은 끝까지 가능하지만, 과정이 한 화면에 섞여 있어 사용자는 계속 현재 맥락을 놓치게 됩니다.
+        `;
+      }
+    </script>
+  </body>
+</html>
