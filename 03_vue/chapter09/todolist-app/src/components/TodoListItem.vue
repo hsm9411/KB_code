@@ -15,7 +15,6 @@
   </li>
 </template>
 <script setup>
-
-const  props = defineProps({todoItem: { type: Object, required: true},});
-const  emit = defineEmits( ["delete-todo", "toggle-completed"]),
+const props = defineProps({ todoItem: { type: Object, required: true } });
+const emit = defineEmits(["delete-todo", "toggle-completed"]);
 </script>
