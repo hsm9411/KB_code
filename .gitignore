@@ -25,3 +25,6 @@ images/
 
 # package-lock (선택: 팀 프로젝트라면 아래 줄 삭제)
 package-lock.json
+
+# Claude Code
+.claude/
