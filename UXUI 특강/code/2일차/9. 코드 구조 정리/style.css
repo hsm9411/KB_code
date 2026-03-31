@@ -1,0 +1,90 @@
+.dashboard {
+  max-width: 600px;
+  margin: 40px auto;
+}
+.dashboard__header {
+  margin-bottom: 20px;
+}
+.dashboard__title {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+.dashboard__subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.todo {
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.todo__content {
+  display: flex;
+  flex-direction: column;
+}
+.todo__title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.todo__date {
+  font-size: 12px;
+  color: #666;
+}
+.todo__actions {
+  display: flex;
+  gap: 6px;
+}
+.todo__button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.todo__button--complete {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  background: #4caf7d;
+  color: white;
+}
+.todo__button--edit {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  background: #4a6fa5;
+  color: white;
+}
+.todo__button--delete {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  background: #c24141;
+  color: white;
+}
+.todo--done {
+  opacity: 0.5;
+}
+.todo--done .todo__title {
+  text-decoration: line-through;
+}
+.todo--important {
+  border-left: 4px solid #c24141;
+}/*# sourceMappingURL=style.css.map */

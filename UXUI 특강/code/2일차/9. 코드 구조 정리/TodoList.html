@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sass + BEM</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- 헤더 -->
+      <div class="dashboard__header">
+        <h1 class="dashboard__title">할 일 관리</h1>
+        <p class="dashboard__subtitle">
+          오늘 해야 할 작업을 확인하고 관리하세요
+        </p>
+      </div>
+
+      <!-- 리스트 -->
+      <div class="todo-list">
+        <div class="todo">
+          <div class="todo__content">
+            <p class="todo__title">UI 강의 자료 정리</p>
+            <span class="todo__date">2026-03-25</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button>
+            <button class="todo__button todo__button--edit">수정</button>
+            <button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+
+        <div class="todo todo--done">
+          <div class="todo__content">
+            <p class="todo__title">Flexbox 정리</p>
+            <span class="todo__date">2026-03-24</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button>
+            <button class="todo__button todo__button--edit">수정</button>
+            <button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+
+        <div class="todo todo--important">
+          <div class="todo__content">
+            <p class="todo__title">프로젝트 발표 준비</p>
+            <span class="todo__date">2026-03-30</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button>
+            <button class="todo__button todo__button--edit">수정</button>
+            <button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+
+        <div class="todo">
+          <div class="todo__content">
+            <p class="todo__title">Sass 실습</p>
+            <span class="todo__date">2026-03-26</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button
+            ><button class="todo__button todo__button--edit">수정</button
+            ><button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+
+        <div class="todo">
+          <div class="todo__content">
+            <p class="todo__title">BEM 복습</p>
+            <span class="todo__date">2026-03-27</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button
+            ><button class="todo__button todo__button--edit">수정</button
+            ><button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+
+        <div class="todo">
+          <div class="todo__content">
+            <p class="todo__title">코드 리뷰</p>
+            <span class="todo__date">2026-03-28</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button
+            ><button class="todo__button todo__button--edit">수정</button
+            ><button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+
+        <div class="todo">
+          <div class="todo__content">
+            <p class="todo__title">Grid 연습</p>
+            <span class="todo__date">2026-03-29</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button
+            ><button class="todo__button todo__button--edit">수정</button
+            ><button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+        <div class="todo">
+          <div class="todo__content">
+            <p class="todo__title">API 연동 연습</p>
+            <span class="todo__date">2026-04-02</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button
+            ><button class="todo__button todo__button--edit">수정</button
+            ><button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+
+        <div class="todo">
+          <div class="todo__content">
+            <p class="todo__title">배포 테스트</p>
+            <span class="todo__date">2026-04-03</span>
+          </div>
+          <div class="todo__actions">
+            <button class="todo__button todo__button--complete">완료</button
+            ><button class="todo__button todo__button--edit">수정</button
+            ><button class="todo__button todo__button--delete">삭제</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
