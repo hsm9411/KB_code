@@ -1,0 +1,38 @@
+.container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+}
+.item {
+  padding: 5px 45px;
+  margin: 5px;
+}
+.item1 {
+  background: red;
+  height: 100px;
+  align-self: flex-start;
+}
+.item2 {
+  background: orange;
+  height: 150px;
+  align-self: flex-end;
+}
+.item3 {
+  background: yellow;
+  height: 100px;
+  align-self: center;
+}
+.item4 {
+  background: green;
+  height: 50px;
+  align-self: baseline;
+}
+.item5 {
+  background: blue;
+
+  align-self: stretch;
+}

@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 20px;
+  background: #f5f5f5;
+  font-family: Arial;
+}
+
+.container {
+  display: grid;
+
+  /*
+    < 실습 1 >
+    카드들을 3개의 열로 배치 
+    각 열의 최소 너비를 200px로 설정 
+    남는 공간은 동일하게 나눔 
+  */
+  /* grid-template-columns: repeat(3, minmax(200px, 1fr)); */
+
+  /* 
+    < 실습 2 >  
+    화면 크기에 따라 열 개수가 자동으로 줄어들도록 수정하세요. 
+  */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* 
+    < 실습3 >
+    다음 코드는 어떤 문제가 발생할까요? 
+  */
+  /* grid-template-columns: repeat(auto-fit, 200px); */
+
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #ddd;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+}
+
+.card p {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.card button {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+}

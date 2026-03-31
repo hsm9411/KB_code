@@ -1,0 +1,25 @@
+.container {
+  width: 500px;
+  border: 1px solid black;
+  display: flex;
+  background: yellow;
+}
+.item {
+  /* padding: 5px 45px; */
+  /* margin: 5px; */
+  border: 1px solid black;
+  flex: 1;
+  width: 100px;
+}
+.item1 {
+  background: red;
+  /* width: 50px; */
+  /* flex-basis: 0;
+  flex-grow: 1; */
+  /* flex: 1; */
+}
+.item2 {
+  background: orange;
+  /* flex-basis: 0;
+  flex-grow: 1; */
+}
