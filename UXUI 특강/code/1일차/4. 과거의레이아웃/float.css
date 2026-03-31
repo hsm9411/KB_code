@@ -2,4 +2,18 @@
   width: 100px;
   height: 100px;
   background: red;
+  float: right;
+}
+
+.left {
+  height: 150px;
+  float: right;
+}
+.right {
+  float: left;
+}
+
+.text {
+  border: 1px solid black;
+  clear: both;
 }

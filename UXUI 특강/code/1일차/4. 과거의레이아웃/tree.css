@@ -1,0 +1,40 @@
+.card {
+  width: 500px;
+  height: 150px;
+  border: 1px solid black;
+  position: relative;
+}
+.box {
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  background: yellow;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left; /* 추가 */
+}
+
+#M {
+  left: 30px;
+  top: 30px;
+}
+#E {
+  left: 60px;
+  top: 10px;
+}
+#R1 {
+  left: 60px;
+  top: 60px;
+}
+#R2 {
+  left: 90px;
+  top: 80px;
+}
+#Y {
+  left: 20px;
+  top: 90px;
+}

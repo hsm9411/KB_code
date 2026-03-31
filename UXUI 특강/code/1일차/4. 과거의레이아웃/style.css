@@ -1,0 +1,40 @@
+.card {
+  width: 500px;
+  height: 150px;
+  border: 1px solid black;
+  position: relative;
+}
+.box {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  display: inline-block;
+  background: red;
+  position: relative;
+  top: 20px;
+  left: 20px;
+  color: aliceblue;
+}
+
+.box2 {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  display: inline-block;
+  background: red;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+#down:hover {
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+
+#up:hover {
+  position: relative;
+  left: 30px;
+  top: 30px;
+}

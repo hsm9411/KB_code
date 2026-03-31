@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>position</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="box">T</div>
+      <div
+        class="box"
+        onmouseover="
+          ((this.style.top = '10px'),
+            (this.style.left = '10px'),
+            (this.style.background = 'green'))
+        "
+        onmouseout="
+          ((this.style.top = '20px'),
+            (this.style.left = '20px'),
+            (this.style.background = 'red'))
+        "
+      >
+        h
+      </div>
+      <div class="box">a</div>
+      <div class="box">n</div>
+      <div
+        class="box"
+        onmouseover="
+          ((this.style.top = '30px'),
+            (this.style.left = '30px'),
+            (this.style.background = 'green'))
+        "
+        onmouseout="
+          ((this.style.top = '20px'),
+            (this.style.left = '20px'),
+            (this.style.background = 'red'))
+        "
+      >
+        k
+      </div>
+      <div class="box">s</div>
+    </div>
+    <div class="card">
+      <div class="box">T</div>
+      <div id="down" class="box">h</div>
+      <div class="box">a</div>
+      <div class="box">n</div>
+      <div id="up" class="box">k</div>
+      <div class="box">s</div>
+    </div>
+
+    <div class="card">
+      <div class="box2"></div>
+    </div>
+  </body>
+</html>
