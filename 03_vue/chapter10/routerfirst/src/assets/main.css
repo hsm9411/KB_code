@@ -1,0 +1,12 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.card {
+  border-radius: 14px;
+}
+
+.navbar .nav-link.router-link-active {
+  font-weight: bold;
+  color: #ffc107 !important;
+}
