@@ -1,0 +1,28 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "todo": "Vue 복습1",
+      "desc": "컴포넌트 구조 다시 보기",
+      "done": false
+    },
+    {
+      "id": "2",
+      "todo": "axios 실습",
+      "desc": "GET과 POST 요청 연습",
+      "done": false
+    },
+    {
+      "id": "3",
+      "todo": "REST API 정리",
+      "desc": "GET POST PUT DELETE 개념 정리",
+      "done": true
+    },
+    {
+      "todo": "ㄴㅇㅁㄹㅇㅁ",
+      "desc": "ㅁㄴㅇㄻㄴㄹㅇ",
+      "done": false,
+      "id": "1TKtr8m"
+    }
+  ]
+}
